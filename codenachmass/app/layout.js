@@ -4,7 +4,7 @@ export const metadata = {
   metadataBase: new URL("https://codenachmass.de"),
   title: "Code nach Maß — Individuelle Software für Steuerkanzleien",
   description:
-    "Individuelle Softwareentwicklung für Steuerkanzleien. Interne Tools, Automatisierung und Fristenkontrolle — passgenau auf Ihren Arbeitsablauf. Gebaut von einem ehemaligen EY-Prüfer.",
+    "Individuelle Softwareentwicklung für Steuerkanzleien. Interne Tools, Automatisierung und Fristenkontrolle — passgenau auf Ihren Arbeitsablauf. Gebaut mit Hintergrund in der Wirtschaftsprüfung.",
   keywords: ["Softwareentwicklung", "Steuerkanzlei", "Fristenmanagement", "individuelle Software", "Kanzlei-Tools"],
   openGraph: {
     title: "Code nach Maß — Individuelle Software für Steuerkanzleien",

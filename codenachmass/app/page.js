@@ -1,7 +1,22 @@
 "use client";
+import { useState } from "react";
 import FristenTracker from "./components/Fristentracker";
 
 export default function Home() {
+  const [copied, setCopied] = useState(false);
+  const copyMail = async () => {
+    const mail = "lukas@codenachmass.de";
+    try {
+      await navigator.clipboard.writeText(mail);
+      setCopied(true); setTimeout(() => setCopied(false), 2000);
+    } catch (e) {
+      const ta = document.createElement("textarea");
+      ta.value = mail; ta.style.position = "fixed"; ta.style.opacity = "0";
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand("copy"); setCopied(true); setTimeout(() => setCopied(false), 2000); } catch (_) {}
+      ta.remove();
+    }
+  };
   return (
     <main>
       {/* NAV */}
@@ -12,6 +27,7 @@ export default function Home() {
             <a href="#ansatz">Ansatz</a>
             <a href="#leistungen">Leistungen</a>
             <a href="#demo">Demo</a>
+            <a href="#ablauf">Ablauf</a>
             <a href="#kontakt" className="navcta">Kontakt</a>
           </nav>
         </div>
@@ -33,8 +49,8 @@ export default function Home() {
             <a href="#kontakt" className="btn btnGhost">Gespräch anfragen</a>
           </div>
           <p className="trust">
-            Gebaut von <strong>Lukas Schmitz</strong> — zuvor Prüfer bei EY im Bereich
-            Financial Services / Asset Management. Ich kenne den Kanzleialltag und spreche Ihre Sprache.
+            Gebaut von <strong>Lukas Schmitz</strong> — zuvor in der Wirtschaftsprüfung, heute Entwickler.
+            Zahlen, Fristen und Bescheide muss man mir nicht erklären.
           </p>
         </div>
       </section>
@@ -138,7 +154,13 @@ export default function Home() {
             Schreiben Sie mir kurz, welcher Prozess Sie Zeit kostet — ich melde mich mit einer
             ehrlichen Einschätzung, ob und wie sich das automatisieren lässt.
           </p>
-          <a href="mailto:lukas@codenachmass.de" className="btn btnMint">lukas@codenachmass.de</a>
+          <div className="kBtns">
+            <a href="mailto:lukas@codenachmass.de" className="btn btnMint">E-Mail schreiben</a>
+            <button type="button" className="copyChip" onClick={copyMail} aria-label="E-Mail-Adresse kopieren">
+              <span className="copyMail">lukas@codenachmass.de</span>
+              <span className="copyIco">{copied ? "✓ Kopiert" : "kopieren"}</span>
+            </button>
+          </div>
         </div>
       </section>
 
@@ -215,6 +237,11 @@ export default function Home() {
         .kLede{max-width:560px;margin:16px auto 30px;color:#D6E0E4;font-size:17px}
         .btnMint{background:var(--mint);color:var(--ink);font-family:var(--mono);font-size:16px}
         .btnMint:hover{background:#5AD9C8}
+        .kBtns{display:flex;flex-direction:column;align-items:center;gap:14px}
+        .copyChip{display:inline-flex;align-items:center;gap:12px;background:transparent;border:1px solid var(--lineD);border-radius:11px;padding:10px 15px;cursor:pointer;font-family:var(--mono);transition:border-color .15s}
+        .copyChip:hover{border-color:var(--mint)}
+        .copyMail{color:#fff;font-size:14.5px}
+        .copyIco{font-size:11.5px;color:var(--mint);letter-spacing:.05em;text-transform:uppercase;min-width:64px;text-align:left}
 
         .foot{background:var(--ink2);color:var(--mutedD);padding:26px 0;border-top:1px solid var(--lineD)}
         .footIn{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}

@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import FristenTracker from "./components/Fristentracker";
+import OnboardingPortal from "./components/OnboardingPortal";
 
 export default function Home() {
   const [copied, setCopied] = useState(false);
@@ -26,7 +27,7 @@ export default function Home() {
           <nav className="navlinks">
             <a href="#ansatz">Ansatz</a>
             <a href="#leistungen">Leistungen</a>
-            <a href="#demo">Demo</a>
+            <a href="#demo">Demos</a>
             <a href="#ablauf">Ablauf</a>
             <a href="#kontakt" className="navcta">Kontakt</a>
           </nav>
@@ -102,7 +103,7 @@ export default function Home() {
       {/* DEMO */}
       <section className="sec" id="demo">
         <div className="wrap">
-          <span className="eyebrow">Beispiel aus der Praxis</span>
+          <span className="eyebrow">Beispiel 1</span>
           <h2 className="h2">Fristentracker für Steuerkanzleien</h2>
           <p className="demoLede">
             Ein Beispiel meiner Arbeit: gesetzlich berechnete Fristen je Mandant (inkl. beratener Fälle
@@ -122,8 +123,32 @@ export default function Home() {
         </div>
       </section>
 
+      {/* DEMO 2 */}
+      <section className="sec secAlt" id="demo2">
+        <div className="wrap">
+          <span className="eyebrow">Beispiel 2</span>
+          <h2 className="h2">Digitales Mandanten-Onboarding</h2>
+          <p className="demoLede">
+            Neue Mandanten aufzunehmen heißt in vielen Kanzleien: E-Mail-Pingpong, PDF-Formulare,
+            eingescannte Vollmachten. Hier erledigt der Mandant alles online — Stammdaten, Unterlagen,
+            SEPA und Vollmacht — und die Kanzlei sieht den Fortschritt live. Wechseln Sie oben rechts
+            zwischen Kanzlei- und Mandanten-Ansicht:
+          </p>
+          <div className="demoFrame">
+            <div className="demoBar" aria-hidden="true">
+              <span className="dotb" /><span className="dotb" /><span className="dotb" />
+              <span className="demoUrl">onboarding · Demo</span>
+            </div>
+            <div className="demoBody">
+              <OnboardingPortal />
+            </div>
+          </div>
+          <p className="demoNote">Voll funktionsfähige Demo. Eingaben bleiben nur lokal in Ihrem Browser — es werden keine Daten übertragen.</p>
+        </div>
+      </section>
+
       {/* ABLAUF */}
-      <section className="sec secAlt" id="ablauf">
+      <section className="sec" id="ablauf">
         <div className="wrap">
           <span className="eyebrow">So läuft es ab</span>
           <h2 className="h2">In drei Schritten zum fertigen Tool.</h2>

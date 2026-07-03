@@ -27,6 +27,7 @@ export default function Home() {
           <nav className="navlinks">
             <a href="#ansatz">Ansatz</a>
             <a href="#leistungen">Leistungen</a>
+            <a href="#kosten">Kosten</a>
             <a href="#demo">Demos</a>
             <a href="#ablauf">Ablauf</a>
             <a href="#kontakt" className="navcta">Kontakt</a>
@@ -96,6 +97,39 @@ export default function Home() {
                 <p className="cardD">{d}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* KOSTEN */}
+      <section className="sec" id="kosten">
+        <div className="wrap">
+          <span className="eyebrow">Ihr Vorteil</span>
+          <h2 className="h2">Einmal zahlen statt ewig mieten.</h2>
+          <p className="kosLede">
+            Standard-Kanzleisoftware kostet pro Arbeitsplatz und Monat — Jahr für Jahr, mit jeder
+            Preiserhöhung. Ein Tool nach Maß entwickeln Sie einmal. Danach gehört es Ihnen: keine
+            laufenden Lizenzgebühren, keine Pro-Nutzer-Kosten, keine Abhängigkeit von Anbieter-Preisen.
+          </p>
+          <div className="compare">
+            <div className="col colOld">
+              <span className="colTag">Lizenz-Software (Abo)</span>
+              <ul>
+                <li><span className="mk mkNo">✕</span> Monatliche Gebühr — pro Nutzer</li>
+                <li><span className="mk mkNo">✕</span> Kosten steigen mit dem Team</li>
+                <li><span className="mk mkNo">✕</span> Funktionen von der Stange</li>
+                <li><span className="mk mkNo">✕</span> Sie mieten dauerhaft, Jahr für Jahr</li>
+              </ul>
+            </div>
+            <div className="col colNew">
+              <span className="colTag colTagNew">Tool nach Maß</span>
+              <ul>
+                <li><span className="mk mkYes">✓</span> Einmalige Entwicklung</li>
+                <li><span className="mk mkYes">✓</span> Gehört Ihnen — keine Lizenzkosten</li>
+                <li><span className="mk mkYes">✓</span> Exakt auf Ihren Workflow zugeschnitten</li>
+                <li><span className="mk mkYes">✓</span> Unabhängig von Anbieter-Preisen</li>
+              </ul>
+            </div>
           </div>
         </div>
       </section>
@@ -247,8 +281,21 @@ export default function Home() {
         .demoBar{display:flex;align-items:center;gap:8px;padding:11px 16px;background:var(--ink);border-bottom:1px solid var(--lineD)}
         .dotb{width:10px;height:10px;border-radius:50%;background:#33454F}
         .demoUrl{font-family:var(--mono);font-size:12px;color:var(--mutedD);margin-left:10px}
-        .demoBody{padding:14px;background:#EEF1F6}
+        .demoBody{padding:14px;background:#EEF1F6;max-height:640px;overflow:auto}
         .demoNote{margin-top:14px;font-family:var(--mono);font-size:12.5px;color:var(--muted)}
+        .kosLede{max-width:660px;margin:14px 0 0;color:var(--muted);font-size:16px}
+        .compare{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:34px}
+        .col{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:26px 24px}
+        .colNew{border-color:var(--accent);box-shadow:0 14px 34px rgba(15,110,107,.12)}
+        .colTag{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+        .colTagNew{color:var(--accent)}
+        .col ul{list-style:none;padding:0;margin:16px 0 0}
+        .col li{display:flex;align-items:flex-start;gap:11px;padding:9px 0;font-size:15px;color:var(--ink);border-top:1px solid var(--lineSoft)}
+        .col li:first-child{border-top:none}
+        .colOld li{color:var(--muted)}
+        .mk{font-family:var(--mono);font-weight:700;flex-shrink:0;font-size:14px;line-height:1.5}
+        .mkNo{color:#B5271F}
+        .mkYes{color:var(--accent)}
 
         .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:44px}
         .step{display:flex;gap:16px}

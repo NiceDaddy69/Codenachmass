@@ -169,10 +169,8 @@ function seed() {
   });
   const mandanten = [
     mk("Sandra Brinkmann", "10042", "privatperson", "A. Berger"),
-    mk("Novak Elektrotechnik e.K.", "10043", "einzelunternehmen", "C. Mertens", { ustVa: "monatlich", dfv: true, lohnsteuer: "monatlich" }),
-    mk("Höffner & Partner GbR", "10044", "personengesellschaft", "L. Weiß", { ustVa: "vierteljaehrlich" }),
-    mk("Lindner Logistik GmbH", "10045", "kapitalgesellschaft", "C. Mertens", { ustVa: "monatlich", dfv: true, lohnsteuer: "monatlich" }),
-    mk("Dr. Marwitz Zahnarztpraxis", "10046", "einzelunternehmen", "A. Berger", { lohnsteuer: "vierteljaehrlich" }),
+    mk("Novak Elektrotechnik e.K.", "10043", "einzelunternehmen", "C. Mertens", { ustVa: "vierteljaehrlich", dfv: true }),
+    mk("Lindner Logistik GmbH", "10045", "kapitalgesellschaft", "L. Weiß", { ustVa: "vierteljaehrlich", dfv: true }),
   ];
   let fristen = [];
   mandanten.forEach((m) => { fristen = fristen.concat(generateFristen(m, [2024, 2025], 2026, BL)); });

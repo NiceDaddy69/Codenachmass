@@ -27,7 +27,7 @@ export default function Home() {
           <nav className="navlinks">
             <a href="#ansatz">Ansatz</a>
             <a href="#leistungen">Leistungen</a>
-            <a href="#kosten">Kosten</a>
+            <a href="#vorteile">Ihre Vorteile</a>
             <a href="#demo">Demos</a>
             <a href="#ablauf">Ablauf</a>
             <a href="#kontakt" className="navcta">Kontakt</a>
@@ -102,9 +102,9 @@ export default function Home() {
       </section>
 
       {/* KOSTEN */}
-      <section className="sec" id="kosten">
+      <section className="sec" id="vorteile">
         <div className="wrap">
-          <span className="eyebrow">Ihr Vorteil</span>
+          <span className="eyebrow">Ihre Vorteile</span>
           <h2 className="h2">Einmal zahlen statt ewig mieten.</h2>
           <p className="kosLede">
             Standard-Kanzleisoftware kostet pro Arbeitsplatz und Monat — Jahr für Jahr, mit jeder
@@ -130,6 +130,24 @@ export default function Home() {
                 <li><span className="mk mkYes">✓</span> Unabhängig von Anbieter-Preisen</li>
               </ul>
             </div>
+          </div>
+
+          <h3 className="advSubhead">Und Sie arbeiten direkt mit dem Entwickler — nicht mit einer Hotline.</h3>
+          <div className="advGrid">
+            {[
+              ["Direkter Ansprechpartner", "Bei Fragen oder Problemen erreichen Sie direkt mich, den Entwickler — keine Hotline, keine Ticket-Nummer, keine Warteschleife."],
+              ["Schneller Service", "Erweiterungswünsche und Anpassungen setze ich in Tagen um — nicht in \u201ekommt vielleicht ins nächste Release\u201c."],
+              ["Ihre Kanzlei verstanden", "Ich kenne Ihren Ablauf persönlich und entwickle genau dafür — statt anonymem Standard-Support, der Ihren Fall nicht kennt."],
+              ["Kein Feature-Ballast", "Genau die Funktionen, die Sie brauchen — nicht 200 Menüpunkte, von denen niemand die Hälfte nutzt."],
+              ["Sie bleiben unabhängig", "Das Tool gehört Ihnen. Kein Lock-in, keine Abhängigkeit von der Roadmap eines großen Anbieters."],
+              ["Klartext statt Kauderwelsch", "Ich erkläre verständlich, was ich baue und warum — Sie behalten die Kontrolle, ohne Technik-Vorwissen."],
+            ].map(([t, d], i) => (
+              <div className="advCard" key={t}>
+                <span className="advN">{String(i + 1).padStart(2, "0")}</span>
+                <h4>{t}</h4>
+                <p>{d}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -296,6 +314,14 @@ export default function Home() {
         .mk{font-family:var(--mono);font-weight:700;flex-shrink:0;font-size:14px;line-height:1.5}
         .mkNo{color:#B5271F}
         .mkYes{color:var(--accent)}
+        .advSubhead{font-family:var(--disp);font-size:clamp(19px,2.4vw,25px);font-weight:600;letter-spacing:-0.01em;margin:48px 0 0}
+        .advGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+        .advCard{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px}
+        .advN{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--accent);letter-spacing:.04em}
+        .advCard h4{font-family:var(--disp);font-size:16.5px;font-weight:600;margin:10px 0 0;letter-spacing:-0.01em}
+        .advCard p{margin-top:8px;color:var(--muted);font-size:14.5px}
+        @media (max-width:900px){ .advGrid{grid-template-columns:1fr 1fr} }
+        @media (max-width:620px){ .advGrid{grid-template-columns:1fr} }
 
         .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:44px}
         .step{display:flex;gap:16px}

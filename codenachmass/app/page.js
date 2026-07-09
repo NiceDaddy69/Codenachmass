@@ -247,6 +247,7 @@ export default function Home() {
           <span className="brand">code nach maß<span className="dot">.</span></span>
           <div className="footLinks">
             <a href="/impressum">Impressum</a>
+            <a href="/datenschutz">Datenschutz</a>
             <span className="footC">© {new Date().getFullYear()} Lukas Schmitz</span>
           </div>
         </div>

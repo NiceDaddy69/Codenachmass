@@ -16,8 +16,8 @@ const C = {
   ambT: "#9A6207", ambB: "#FBF3DD", sltT: "#475569", sltB: "#EDF1F8",
   grnT: "#1B7A43", grnB: "#E4F2E9",
 };
-const SANS = '"Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif';
-const MONO = '"JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace';
+const SANS = '"Inter Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif';
+const MONO = '"JetBrains Mono Variable", ui-monospace, "SF Mono", Menlo, monospace';
 
 /* ---------- Datum-Grundlagen ---------- */
 function easter(y) {
@@ -289,7 +289,6 @@ export default function FristenTracker() {
   return (
     <div style={{ fontFamily: SANS, background: C.bg, color: C.ink, minHeight: 640, borderRadius: 16, overflow: "hidden", border: `1px solid ${C.line}` }}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
         .ft-btn{cursor:pointer;border:none;font-family:${SANS};transition:all .14s ease}
         .ft-btn:focus-visible{outline:2px solid ${C.accent};outline-offset:2px}
         .ft-row{transition:background .12s ease;cursor:pointer}

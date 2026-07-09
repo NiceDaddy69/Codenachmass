@@ -14,8 +14,8 @@ const C = {
   grnT: "#1B7A43", grnB: "#E4F2E9", ambT: "#9A6207", ambB: "#FBF3DD",
   sltT: "#475569", sltB: "#EDF1F8",
 };
-const SANS = '"Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif';
-const MONO = '"JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace';
+const SANS = '"Inter Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif';
+const MONO = '"JetBrains Mono Variable", ui-monospace, "SF Mono", Menlo, monospace';
 
 const TYP_LABEL = {
   privatperson: "Privatperson",

@@ -80,13 +80,13 @@ export default function Home() {
       <section className="hero" id="top">
         <div className="grid" aria-hidden="true" />
         <div className="wrap heroIn">
-          <span className="eyebrow" style={{ color: "var(--mint)" }}>Für Creator mit 10.000 – 80.000 Followern</span>
-          <h1 className="h1">Deine Community.<br />Dein eigenes Produkt.<br /><span className="hl">Ich baue es.</span></h1>
+          <span className="eyebrow" style={{ color: "var(--mint)" }}>Für Creator mit 10.000 – 100.000 Followern</span>
+          <h1 className="h1">Deine Community feiert dich.<br />Zeit für dein eigenes Produkt.<br /><span className="hl">Ich baue es für dich.</span></h1>
           <div className="rule tall heroRule" style={{ color: "var(--mint)" }} />
           <p className="lede">
-            Du hast dir eine Community aufgebaut, aber noch nichts Eigenes, das du ihr anbieten kannst?
-            Ich entwickle ein digitales Produkt, das genau zu deinen Followern passt — komplett
-            auf meine Kosten. Verkauft es sich, teilen wir den Gewinn 50/50.
+            Mit deinem Content gibst du deiner Community jeden Tag etwas mit. Ein eigenes digitales
+            Produkt ist der nächste Schritt — und ich entwickle es passgenau für deine Follower,
+            komplett auf meine Kosten. Verkauft es sich, teilen wir den Gewinn 50/50.
           </p>
           <div className="cta">
             <a href="#kontakt" className="btn btnPrimary">Unverbindlich anfragen</a>
@@ -222,7 +222,7 @@ export default function Home() {
             <div className="calcIn">
               <label className="fld">
                 <span className="fldTop"><span>Deine Follower</span><output>{num(follower)}</output></span>
-                <input type="range" min="10000" max="80000" step="1000" value={follower} onChange={(e) => setFollower(+e.target.value)} />
+                <input type="range" min="10000" max="100000" step="1000" value={follower} onChange={(e) => setFollower(+e.target.value)} />
               </label>
               <label className="fld">
                 <span className="fldTop"><span>Anteil, der kauft</span><output>{quote.toLocaleString("de-DE", { minimumFractionDigits: 1 })} %</output></span>
@@ -340,7 +340,7 @@ export default function Home() {
         .hero{position:relative;background:var(--ink);color:#fff;overflow:hidden;padding:96px 0 84px}
         .grid{position:absolute;inset:0;background-image:linear-gradient(var(--lineD) 1px,transparent 1px),linear-gradient(90deg,var(--lineD) 1px,transparent 1px);background-size:48px 48px;opacity:.28;mask-image:radial-gradient(120% 90% at 20% 0%,#000 30%,transparent 78%)}
         .heroIn{position:relative}
-        .h1{font-size:clamp(38px,6.4vw,72px);font-weight:600}
+        .h1{font-size:clamp(32px,5.6vw,64px);font-weight:600;margin-top:14px}
         .heroRule{max-width:320px;margin:26px 0}
         .lede{max-width:620px;font-size:clamp(17px,2.1vw,20px);color:#D6E0E4}
         .cta{display:flex;gap:12px;flex-wrap:wrap;margin:30px 0 34px}

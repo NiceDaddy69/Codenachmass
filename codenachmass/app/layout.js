@@ -7,7 +7,7 @@ export const metadata = {
   metadataBase: new URL("https://codenachmass.de"),
   title: "Code nach Maß — Dein eigenes digitales Produkt für deine Community",
   description:
-    "Für Creator mit 10.000 bis 80.000 Followern: Ich entwickle ein digitales Produkt, das genau zu deiner Community passt — ohne Kosten für dich, komplett hands-off. Den Gewinn teilen wir 50/50.",
+    "Für Creator mit 10.000 bis 100.000 Followern: Ich entwickle ein digitales Produkt, das genau zu deiner Community passt — ohne Kosten für dich, komplett hands-off. Den Gewinn teilen wir 50/50.",
   keywords: ["digitale Produkte", "Mikro-Influencer", "Creator", "Community monetarisieren", "E-Book", "Online-Kurs", "Vorlagen"],
   openGraph: {
     title: "Code nach Maß — Dein eigenes digitales Produkt für deine Community",

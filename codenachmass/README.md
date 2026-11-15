@@ -1,6 +1,6 @@
 # codenachmass.de — Landingpage
 
-Next.js 14 (App Router). Eine Seite für Mikro-Influencer (10k–80k Follower): digitale Produkte nach Maß für die eigene Community, 0 € Kosten, Gewinn 50/50. Dazu Impressum und Datenschutz.
+Next.js 14 (App Router). Eine Seite für Mikro-Influencer (10k–100k Follower): digitale Produkte nach Maß für die eigene Community, 0 € Kosten, Gewinn 50/50. Dazu Impressum und Datenschutz.
 
 ## Vor dem Livegang
 1. **Impressum ausfüllen:** In `app/impressum/page.js` die `[Platzhalter]` (Anschrift, ggf. Telefon/USt) ersetzen. Ladungsfähige Anschrift ist Pflicht.

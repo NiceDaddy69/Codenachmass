@@ -58,13 +58,11 @@ export default function Datenschutz() {
           verwendet <strong>keine Tracking- oder Analyse-Dienste</strong> (z. B. kein Google Analytics).
         </p>
 
-        <h2 style={H2}>6. Interaktive Demo-Tools</h2>
+        <h2 style={H2}>6. Beispielrechner</h2>
         <p style={P}>
-          Die auf dieser Seite eingebetteten Demo-Anwendungen (z. B. Fristentracker, Onboarding-Portal)
-          laufen vollständig in Ihrem Browser. Eingaben, die Sie dort vornehmen, werden ausschließlich
-          <strong> lokal in Ihrem Browser</strong> gespeichert (localStorage) und <strong>nicht an mich
-          oder Dritte übertragen</strong>. Sie können diese Daten jederzeit über die Einstellungen Ihres
-          Browsers löschen.
+          Der Beispielrechner auf der Startseite läuft vollständig in Ihrem Browser. Die dort
+          eingestellten Werte werden <strong>weder gespeichert noch an mich oder Dritte
+          übertragen</strong>.
         </p>
 
         <h2 style={H2}>7. Kontaktaufnahme per E-Mail</h2>

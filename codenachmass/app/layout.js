@@ -5,13 +5,13 @@ import "./globals.css";
 
 export const metadata = {
   metadataBase: new URL("https://codenachmass.de"),
-  title: "Code nach Maß — Individuelle Software für Steuerkanzleien",
+  title: "Code nach Maß — Dein eigenes digitales Produkt für deine Community",
   description:
-    "Individuelle Softwareentwicklung für Steuerkanzleien. Interne Tools, Automatisierung und Fristenkontrolle — passgenau auf Ihren Arbeitsablauf. Gebaut mit Hintergrund in der Wirtschaftsprüfung.",
-  keywords: ["Softwareentwicklung", "Steuerkanzlei", "Fristenmanagement", "individuelle Software", "Kanzlei-Tools"],
+    "Für Creator mit 10.000 bis 80.000 Followern: Ich entwickle ein digitales Produkt, das genau zu deiner Community passt — ohne Kosten für dich, komplett hands-off. Den Gewinn teilen wir 50/50.",
+  keywords: ["digitale Produkte", "Mikro-Influencer", "Creator", "Community monetarisieren", "E-Book", "Online-Kurs", "Vorlagen"],
   openGraph: {
-    title: "Code nach Maß — Individuelle Software für Steuerkanzleien",
-    description: "Interne Tools, Automatisierung und Fristenkontrolle — passgenau auf Ihren Arbeitsablauf.",
+    title: "Code nach Maß — Dein eigenes digitales Produkt für deine Community",
+    description: "Ich baue das Produkt, du kennst deine Community. 0 € Kosten für dich, 50/50 beim Gewinn.",
     locale: "de_DE",
     type: "website",
   },

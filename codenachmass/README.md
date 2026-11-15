@@ -18,4 +18,3 @@ Next.js 14 (App Router). Eine Seite für Mikro-Influencer (10k–80k Follower): 
 ## Anpassen
 - Texte/Design: `app/page.js` (+ `app/globals.css`)
 - Produktbeispiele, „Das übernehme ich“ und FAQ: Listen `NICHES`, `TAKEOVER`, `FAQ` oben in `app/page.js`
-- `app/components/` enthält noch die alten Kanzlei-Demos (Fristentracker, Onboarding). Sie sind nicht mehr eingebunden und können gelöscht werden.

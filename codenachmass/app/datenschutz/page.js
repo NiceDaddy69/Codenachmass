@@ -58,11 +58,11 @@ export default function Datenschutz() {
           verwendet <strong>keine Tracking- oder Analyse-Dienste</strong> (z. B. kein Google Analytics).
         </p>
 
-        <h2 style={H2}>6. Beispielrechner</h2>
+        <h2 style={H2}>6. Beispielrechner und Muster-Produkt</h2>
         <p style={P}>
-          Der Beispielrechner auf der Startseite läuft vollständig in Ihrem Browser. Die dort
-          eingestellten Werte werden <strong>weder gespeichert noch an mich oder Dritte
-          übertragen</strong>.
+          Der Beispielrechner und das Muster-Produkt (Meal-Prep-Planer) auf der Startseite laufen
+          vollständig in Ihrem Browser. Die dort gemachten Eingaben werden <strong>weder gespeichert
+          noch an mich oder Dritte übertragen</strong>.
         </p>
 
         <h2 style={H2}>7. Kontaktaufnahme per E-Mail</h2>
@@ -77,7 +77,23 @@ export default function Datenschutz() {
           Der E-Mail-Dienst wird über Zoho (Zoho Corporation) bereitgestellt.
         </p>
 
-        <h2 style={H2}>8. Ihre Rechte</h2>
+        <h2 style={H2}>8. Kontaktaufnahme per WhatsApp</h2>
+        <p style={P}>
+          Auf dieser Website finden Sie Schaltflächen, über die Sie mich per WhatsApp anschreiben
+          können. Erst wenn Sie eine solche Schaltfläche anklicken, werden Sie zu WhatsApp
+          weitergeleitet; beim bloßen Besuch dieser Website werden keine Daten an WhatsApp übertragen.
+          Wenn Sie mir über WhatsApp schreiben, verarbeite ich Ihre Telefonnummer, Ihren Profilnamen
+          und den Inhalt Ihrer Nachrichten zur Bearbeitung Ihrer Anfrage. Rechtsgrundlage ist Art. 6
+          Abs. 1 lit. b DSGVO bzw. lit. f DSGVO.
+        </p>
+        <p style={P}>
+          Anbieter des Dienstes ist die WhatsApp Ireland Limited, 4 Grand Canal Square, Dublin 2,
+          Irland. WhatsApp verarbeitet dabei Daten in eigener Verantwortung, unter Umständen auch
+          außerhalb der EU. Näheres finden Sie in der Datenschutzrichtlinie von WhatsApp. Wenn Sie
+          WhatsApp nicht nutzen möchten, erreichen Sie mich jederzeit per E-Mail.
+        </p>
+
+        <h2 style={H2}>9. Ihre Rechte</h2>
         <p style={P}>
           Sie haben das Recht auf Auskunft (Art. 15 DSGVO), Berichtigung (Art. 16), Löschung (Art. 17),
           Einschränkung der Verarbeitung (Art. 18), Datenübertragbarkeit (Art. 20) sowie Widerspruch
@@ -89,7 +105,7 @@ export default function Datenschutz() {
           u. a. die Landesbeauftragte für Datenschutz und Informationsfreiheit Nordrhein-Westfalen.
         </p>
 
-        <h2 style={H2}>9. SSL/TLS-Verschlüsselung</h2>
+        <h2 style={H2}>10. SSL/TLS-Verschlüsselung</h2>
         <p style={P}>
           Diese Website nutzt aus Sicherheitsgründen eine TLS-Verschlüsselung. Eine verschlüsselte
           Verbindung erkennen Sie am „https://" in der Adresszeile Ihres Browsers.

@@ -92,6 +92,9 @@ export default function Home() {
         <div className="blob b2" aria-hidden="true" />
         <div className="wrap heroIn">
           <div>
+            <a href={WA} target="_blank" rel="noopener noreferrer" className="pilot">
+              <span className="pilotDot" aria-hidden="true" /> Ich suche gerade meinen ersten Creator — mit Sonderkonditionen <span aria-hidden="true">→</span>
+            </a>
             <span className="eyebrow">Für Creator mit 10.000 – 100.000 Followern</span>
             <h1 className="h1">Deine Community feiert dich.<br />Zeit für dein eigenes Produkt.<br /><span className="hl">Ich baue es für dich.</span></h1>
             <p className="lede">
@@ -109,9 +112,9 @@ export default function Home() {
               <div className="fact"><strong>Hands-off</strong><span>Ich erstelle, du gibst frei</span></div>
             </div>
           </div>
-          <a href="#ueber" className="me">
-            <img src="/lukas.jpg" alt="Lukas Schmitz" width="720" height="900" />
-            <span className="meTxt"><strong>Hi, ich bin Lukas.</strong><span>Du schreibst immer direkt mit mir.</span></span>
+          <a href="#muster" className="peek" aria-label="Zum Muster-Produkt">
+            <div className="peekIn" aria-hidden="true" inert=""><MealPrepDemo /></div>
+            <span className="peekTag">Muster-Produkt · ausprobieren ↓</span>
           </a>
         </div>
       </section>
@@ -178,6 +181,10 @@ export default function Home() {
             <p className="demoNote">Muster zur Veranschaulichung mit Beispielwerten. Deine Eingaben bleiben in deinem Browser.</p>
           </div>
           <MealPrepDemo />
+          <div className="musterCta">
+            <p>So etwas für deine Community?</p>
+            <a href={WA} target="_blank" rel="noopener noreferrer" className="btn btnWa"><WaIcon /> Schreib mir auf WhatsApp</a>
+          </div>
         </div>
       </section>
 
@@ -215,30 +222,6 @@ export default function Home() {
           <p className="kosLede">
             Ich verdiene nur, wenn du verdienst. Deshalb will ich genauso wie du, dass es richtig gut wird.
           </p>
-          <div className="compare">
-            <div className="col colOld">
-              <span className="colTag">Alleine umsetzen</span>
-              <ul>
-                <li><span className="mk mkNo">✕</span> Wochen an Arbeit neben dem Content</li>
-                <li><span className="mk mkNo">✕</span> Kosten für Design, Tools und Technik</li>
-                <li><span className="mk mkNo">✕</span> Shop, Zahlung und Auslieferung selbst einrichten</li>
-                <li><span className="mk mkNo">✕</span> Support-Anfragen landen bei dir</li>
-                <li><span className="mk mkNo">✕</span> Das volle Risiko liegt bei dir</li>
-              </ul>
-            </div>
-            <div className="col colNew">
-              <span className="colTag colTagNew">Mit code nach maß</span>
-              <ul>
-                <li><span className="mk mkYes">✓</span> Erstellung komplett hands-off für dich</li>
-                <li><span className="mk mkYes">✓</span> 0 € Kosten — ich gehe in Vorleistung</li>
-                <li><span className="mk mkYes">✓</span> Verkaufsseite und Technik laufen fertig</li>
-                <li><span className="mk mkYes">✓</span> Ich kümmere mich um die Käufer</li>
-                <li><span className="mk mkYes">✓</span> 50 % vom Gewinn bei jedem Verkauf</li>
-              </ul>
-            </div>
-          </div>
-
-          <h3 className="advSubhead">Das übernehme ich für dich.</h3>
           <div className="advGrid">
             {TAKEOVER.map(([t, d]) => (
               <div className="advCard" key={t}>
@@ -247,10 +230,15 @@ export default function Home() {
               </div>
             ))}
           </div>
-          <div id="rechner" className="calcHead">
-            <h3 className="advSubhead">Was könnte für dich drin sein?</h3>
-            <p className="kosLede">Stell die Regler auf deinen Kanal ein und spiel es durch.</p>
-          </div>
+        </div>
+      </section>
+
+      {/* RECHNER */}
+      <section className="sec" id="rechner">
+        <div className="wrap">
+          <span className="eyebrow">Beispielrechnung</span>
+          <h2 className="h2">Was könnte für dich drin sein?</h2>
+          <p className="kosLede">Stell die Regler auf deinen Kanal ein und spiel es durch.</p>
           <div className="calc">
             <div className="calcIn">
               <label className="fld">
@@ -284,7 +272,7 @@ export default function Home() {
       </section>
 
       {/* ABLAUF */}
-      <section className="sec" id="ablauf">
+      <section className="sec secAlt" id="ablauf">
         <div className="wrap">
           <span className="eyebrow">So läuft es ab</span>
           <h2 className="h2">In vier Schritten zu deinem Produkt.</h2>
@@ -374,6 +362,14 @@ export default function Home() {
         .b1{width:420px;height:420px;background:#FFC9A3;top:-140px;right:-80px}
         .b2{width:320px;height:320px;background:#FFE3A8;bottom:-160px;left:-100px}
         .heroIn{position:relative;display:grid;grid-template-columns:1.8fr .75fr;gap:40px;align-items:center}
+        .pilot{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:13.5px;font-weight:600;color:var(--ink);margin-bottom:18px;box-shadow:0 4px 12px rgba(42,29,23,.06);transition:border-color .15s}
+        .pilot:hover{border-color:var(--accent)}
+        .pilotDot{width:8px;height:8px;border-radius:50%;background:var(--wa);flex-shrink:0}
+        .hero .eyebrow{display:block}
+        .peek{display:block;justify-self:end;width:274px;transform:rotate(2deg);transition:transform .2s}
+        .peek:hover{transform:rotate(0deg)}
+        .peekIn{width:380px;height:694px;transform:scale(.72);transform-origin:top left;margin:0 -106px -194px 0;pointer-events:none}
+        .peekTag{display:block;text-align:center;margin-top:12px;font-size:13.5px;font-weight:600;color:var(--accent)}
         .h1{font-size:clamp(30px,3.7vw,44px);font-weight:600;margin-top:16px;text-wrap:balance}
         .hl{color:var(--accent)}
         .lede{max-width:600px;font-size:clamp(16.5px,1.9vw,19px);color:var(--muted);margin-top:22px}
@@ -389,12 +385,6 @@ export default function Home() {
         .fact{border:1px solid var(--line);border-radius:16px;padding:13px 18px;background:rgba(255,255,255,.8);min-width:160px}
         .fact strong{display:block;font-family:var(--disp);font-size:23px;font-weight:600;color:var(--accent);letter-spacing:-0.01em}
         .fact span{font-size:13.5px;color:var(--muted)}
-        .me{display:block;background:#fff;border-radius:26px;padding:10px 10px 0;box-shadow:0 24px 50px rgba(42,29,23,.16);transform:rotate(2deg);transition:transform .2s}
-        .me:hover{transform:rotate(0deg)}
-        .me img{border-radius:18px;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover}
-        .meTxt{display:block;padding:12px 8px 14px}
-        .meTxt strong{display:block;font-family:var(--disp);font-size:17px}
-        .meTxt span{font-size:13.5px;color:var(--muted)}
 
         .sec{padding:80px 0}
         .secAlt{background:var(--panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
@@ -409,6 +399,8 @@ export default function Home() {
         .checks li::before{content:"✓";position:absolute;left:0;top:7px;width:21px;height:21px;border-radius:50%;background:var(--accentSoft);color:var(--accent);font-size:12.5px;font-weight:700;display:grid;place-items:center}
         .mine{margin-top:16px;color:var(--muted);font-size:15.5px;max-width:560px}
         .demoNote{margin-top:14px;font-size:13px;color:var(--muted)}
+        .musterCta{grid-column:1/-1;display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap;background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:20px 24px}
+        .musterCta p{font-family:var(--disp);font-size:20px;font-weight:600;letter-spacing:-0.01em}
 
         .swipe{display:none}
         .niches{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px}
@@ -422,27 +414,15 @@ export default function Home() {
         .nicheNote{margin-top:24px;color:var(--muted);font-size:15.5px}
         .nicheNote a{color:var(--accent);font-weight:600;text-decoration:underline;text-underline-offset:3px}
 
-        .compare{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:32px}
-        .col{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:24px}
-        .colNew{background:#fff;border:2px solid var(--accent);box-shadow:0 14px 34px rgba(194,69,30,.13)}
-        .colTag{font-size:12.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-        .colTagNew{color:var(--accent)}
-        .col ul{list-style:none;padding:0;margin:14px 0 0}
-        .col li{display:flex;align-items:flex-start;gap:11px;padding:9px 0;font-size:15px;color:var(--ink);border-top:1px solid var(--lineSoft)}
-        .col li:first-child{border-top:none}
-        .colOld li{color:var(--muted)}
         .mk{font-weight:700;flex-shrink:0;font-size:14px;line-height:1.6}
-        .mkNo{color:#A8A096}
         .mkYes{color:var(--accent)}
-        .advSubhead{font-family:var(--disp);font-size:clamp(20px,2.4vw,26px);font-weight:600;letter-spacing:-0.01em;margin:48px 0 0}
-        .advGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}
+        .advGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:30px}
         .advCard{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:18px 20px}
         .advCard h4{font-family:var(--disp);font-size:16.5px;font-weight:600;margin:0;letter-spacing:-0.01em}
         .advCard p{margin-top:8px;color:var(--muted);font-size:14.5px}
 
-        .calcHead{scroll-margin-top:70px}
         .calc{display:grid;grid-template-columns:1.1fr 1fr;gap:18px;margin-top:26px}
-        .calcIn{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:26px 24px;display:flex;flex-direction:column;gap:26px;justify-content:center}
+        .calcIn{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:26px 24px;display:flex;flex-direction:column;gap:26px;justify-content:center}
         .fld{display:block}
         .fldTop{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:15px;color:var(--muted);margin-bottom:10px}
         .fldTop output{font-weight:700;font-size:16px;color:var(--ink)}
@@ -505,10 +485,10 @@ export default function Home() {
           .navlinks a:not(.navcta){display:none}
           .hero{padding:36px 0 44px}
           .heroIn{grid-template-columns:1fr;gap:26px}
-          .me{order:-1;display:flex;align-items:center;gap:12px;background:transparent;box-shadow:none;padding:0;transform:none}
-          .me img{width:54px;height:54px;aspect-ratio:1;border-radius:50%;object-position:50% 30%;border:2px solid #fff;box-shadow:0 6px 16px rgba(42,29,23,.18)}
-          .meTxt{padding:0}
-          .meTxt strong{font-size:15.5px}
+          .peek{display:none}
+          .pilot{font-size:12.5px;padding:7px 12px;margin-bottom:14px}
+          .musterCta{flex-direction:column;gap:12px;text-align:center}
+          .musterCta .btn{width:100%}
           .h1{margin-top:12px}
           .cta{margin:22px 0 22px}
           .cta .btn{flex:1 1 100%}
@@ -522,10 +502,7 @@ export default function Home() {
           .niches::-webkit-scrollbar{display:none}
           .card{flex:0 0 80%;scroll-snap-align:center}
           .card:hover{transform:none;box-shadow:none}
-          .compare{grid-template-columns:1fr;gap:12px;margin-top:24px}
-          .colOld{order:2}
-          .advSubhead{margin-top:38px}
-          .advGrid{grid-template-columns:1fr;gap:0;margin-top:14px;background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:6px 18px}
+          .advGrid{grid-template-columns:1fr;gap:0;margin-top:22px;background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:6px 18px}
           .advCard{background:transparent;border:0;border-radius:0;padding:11px 0;border-top:1px solid var(--line)}
           .advCard:first-child{border-top:0}
           .advCard h4{font-size:15.5px}

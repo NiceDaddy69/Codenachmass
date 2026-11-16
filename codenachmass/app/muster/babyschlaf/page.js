@@ -21,11 +21,12 @@ export default function MusterBabyschlaf() {
             <p className="lede">
               Ein erster Entwurf, wie ein eigenes Produkt für dich aussehen könnte: ein kleiner
               Begleiter, den Eltern abends und nachts wirklich öffnen — nicht noch ein PDF, das im
-              Download-Ordner verschwindet. Probier es aus:
+              Download-Ordner verschwindet. Bindungsorientiert gedacht: begleiten statt trainieren.
+              Probier es aus:
             </p>
             <ul className="checks">
-              <li><strong>Heute:</strong> Alter und Aufwachzeit eingeben, der Tagesplan mit Schläfchen und Schlafenszeit entsteht von selbst</li>
-              <li><strong>Routine:</strong> eine Abendroutine zum Abhaken — mit klaren Aufgaben für Papa, gerade in der Stillzeit</li>
+              <li><strong>Heute:</strong> Alter und Aufwachzeit eingeben und sehen, wann das Baby ungefähr müde wird — als Orientierung, nicht als Stundenplan</li>
+              <li><strong>Routine:</strong> eine Abendroutine zum Abhaken — mit klaren Aufgaben für Papa, gerade in der Stillzeit, bis zur Einschlafbegleitung</li>
               <li><strong>SOS:</strong> Schritt für Schritt durch den Moment, in dem das Baby nicht einschlafen will</li>
               <li><strong>Wissen:</strong> was in welchem Alter normal ist und wie Babys sicher schlafen</li>
             </ul>

@@ -20,20 +20,20 @@ const ROUTINE = [
   ["Licht dimmen, Bildschirme aus", "Etwa 30 Minuten vor dem Schlafen. Das signalisiert: Der Tag ist vorbei."],
   ["Waschen oder baden", "Muss nicht täglich sein – ein warmer Waschlappen reicht als Ritual."],
   ["Frische Windel und Schlafsack", "Papa-Aufgabe par excellence: Immer derselbe Ablauf, immer derselbe Ort."],
-  ["Stillen oder Fläschchen", "Wenn Mama stillt: Übernimm danach. So lernt dein Baby, dass Einschlafen auch mit dir geht."],
+  ["Stillen oder Fläschchen", "Einschlafstillen ist völlig in Ordnung. An anderen Abenden übernimmst du – Nähe geht auch mit Papa."],
   ["Lied, Summen oder kurze Geschichte", "Immer dasselbe. Deine tiefe Stimme wirkt oft besonders beruhigend."],
-  ["Ablegen – schläfrig, aber wach", "Hand auf die Brust, ruhig atmen, leise „schhh“. Gib euch Zeit."],
+  ["In den Schlaf begleiten", "Im Arm, in der Trage oder dicht neben ihm: Bleib, bis dein Baby schläft. Nähe ist kein Verwöhnen."],
 ];
 const SOS = [
   ["Hunger?", "Letzte Mahlzeit länger als 2–3 Stunden her? Dann zuerst füttern. In Wachstumsphasen kommt der Hunger öfter."],
   ["Windel und Kleidung?", "Volle Windel, kratzendes Etikett, zu warm oder zu kalt? Fühl im Nacken: warm und trocken ist richtig."],
   ["Luft im Bauch?", "Hochnehmen, an die Schulter legen, sanft den Rücken klopfen. Fliegergriff hilft vielen Babys."],
-  ["Übermüdet?", "Zu lange wach macht das Einschlafen schwerer. Reize runter: dunkler Raum, keine Ansprache, ruhige Stimme."],
-  ["Nähe tanken", "Fünf Minuten ruhig durch den Raum tragen, eng am Körper. Dann hinsetzen und noch kurz halten, bevor du ablegst."],
+  ["Übermüdet?", "Zu lange wach macht das Einschlafen schwerer. Reize runter: dunkler Raum, wenig Ansprache, ruhige Stimme, viel Körperkontakt."],
+  ["Nähe tanken", "Ab in die Trage oder eng an die Brust und ruhig durch den Raum gehen. Weinen ist Kommunikation – du darfst immer trösten."],
   ["Gleichmäßiges Geräusch", "Leises Rauschen oder Summen kann helfen – leise und nicht direkt am Bett."],
-  ["Durchatmen", "Du machst nichts falsch. Wenn du merkst, dass du an deine Grenze kommst: Baby sicher ablegen, zwei Minuten rausgehen, dann weitermachen oder abwechseln."],
+  ["Durchatmen", "Du machst nichts falsch. Dein Baby spürt deine Ruhe. Wenn du an deine Grenze kommst: Wechselt euch ab – oder leg es kurz sicher ab, atme zwei Minuten durch und komm zurück."],
 ];
-const SAFE = ["Immer in Rückenlage schlafen legen", "Eigenes Bett im Elternschlafzimmer", "Schlafsack statt Decke, kein Kissen, kein Nestchen", "Rauchfreie Umgebung", "Raumtemperatur etwa 16–18 °C"];
+const SAFE = ["Immer in Rückenlage schlafen legen", "Nah bei euch: eigenes Bett oder Beistellbett im Elternschlafzimmer", "Schlafsack statt Decke, kein Kissen, kein Nestchen", "Rauchfreie Umgebung", "Raumtemperatur etwa 16–18 °C"];
 
 const toMin = (t) => { const [h, m] = t.split(":").map(Number); return h * 60 + m; };
 const hhmm = (min) => { const m = ((min % 1440) + 1440) % 1440; return `${String(Math.floor(m / 60)).padStart(2, "0")}:${String(m % 60).padStart(2, "0")}`; };
@@ -89,7 +89,7 @@ export default function BabySleepDemo() {
               <span>Heute aufgewacht um</span>
               <input type="time" value={wake} onChange={(e) => setWake(e.target.value)} />
             </label>
-            <span className="cap">Euer Tagesplan</span>
+            <span className="cap">Euer Tag · grobe Orientierung</span>
             <ol className="plan">
               {plan.map((p) => (
                 <li key={p.k} className={p.k === "bed" ? "bed" : p.k.startsWith("nap") ? "nap" : ""}>
@@ -98,7 +98,7 @@ export default function BabySleepDemo() {
                 </li>
               ))}
             </ol>
-            <p className="hint">Orientierung, kein Stundenplan. Wird dein Baby früher müde, geht es früher schlafen.</p>
+            <p className="hint">Kein Stundenplan: Dein Baby gibt den Takt vor. Achte auf seine Müdigkeitszeichen – die Zeiten helfen dir nur, sie nicht zu verpassen.</p>
           </>
         )}
 
@@ -146,6 +146,10 @@ export default function BabySleepDemo() {
               <div><strong>{A.ges}</strong><span>Schlaf pro Tag</span></div>
             </div>
             <p className="info">{A.info}</p>
+            <div className="stance">
+              <strong>Unsere Haltung</strong>
+              <p>Kein Schlaftraining, kein Schreienlassen. Nächtliches Aufwachen ist im ersten Jahr normal – wir begleiten, statt zu trainieren.</p>
+            </div>
             <span className="cap">Sicher schlafen</span>
             <ul className="safe">{SAFE.map((s) => <li key={s}>{s}</li>)}</ul>
             <p className="hint">Orientierungswerte – jedes Baby ist anders.</p>
@@ -197,7 +201,10 @@ export default function BabySleepDemo() {
         .stats div{background:#EEF0F8;border-radius:12px;padding:10px 4px;text-align:center}
         .stats strong{display:block;font-family:var(--disp);font-size:15px}
         .stats span{font-size:11px;color:var(--muted)}
-        .info{font-size:14px;margin:12px 0 18px;line-height:1.55}
+        .info{font-size:14px;margin:12px 0 14px;line-height:1.55}
+        .stance{background:#232B4D;color:#fff;border-radius:14px;padding:12px 14px;margin-bottom:18px}
+        .stance strong{font-size:13.5px}
+        .stance p{font-size:13.5px;color:#D5DAEE;margin-top:3px;line-height:1.5}
         .safe{list-style:none;margin:0;padding:0}
         .safe li{position:relative;padding:7px 0 7px 24px;font-size:14px;border-bottom:1px solid var(--lineSoft)}
         .safe li::before{content:"✓";position:absolute;left:2px;color:#3E4C7A;font-weight:700}

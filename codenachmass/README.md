@@ -17,4 +17,6 @@ Next.js 14 (App Router). Eine Seite für Mikro-Influencer (10k–100k Follower):
 
 ## Anpassen
 - Texte/Design: `app/page.js` (+ `app/globals.css`)
+- Muster-Produkt (Meal-Prep-Planer): `app/components/MealPrepDemo.jsx`
+- Foto: `public/lukas.jpg` · WhatsApp-Nummer: Konstante `WA` oben in `app/page.js`
 - Produktbeispiele, „Das übernehme ich“ und FAQ: Listen `NICHES`, `TAKEOVER`, `FAQ` oben in `app/page.js`

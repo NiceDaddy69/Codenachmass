@@ -1,8 +1,10 @@
 "use client";
 import { useState } from "react";
+import MealPrepDemo from "./components/MealPrepDemo";
 
 const MAIL = "lukas@codenachmass.de";
 const MAILTO = `mailto:${MAIL}?subject=${encodeURIComponent("Eigenes Produkt für meine Community")}`;
+const WA = `https://wa.me/4917663250203?text=${encodeURIComponent("Hi Lukas, ich habe deine Seite gesehen und interessiere mich für ein eigenes Produkt für meine Community. Mein Kanal: ")}`;
 const eur = (n) => new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(n);
 const num = (n) => new Intl.NumberFormat("de-DE").format(n);
 
@@ -30,12 +32,20 @@ const TAKEOVER = [
 const FAQ = [
   ["Kostet mich das wirklich nichts?", "Ja. Du zahlst weder für Konzept noch für Erstellung, Verkaufsseite oder Technik. Die gesamte Vorleistung liegt bei mir. Geld fließt erst, wenn das Produkt verkauft wird — und dann wird der Gewinn geteilt."],
   ["Wie viel Arbeit habe ich damit?", "Sehr wenig. Die Erstellung ist für dich komplett hands-off. Ich brauche dich nur dort, wo niemand dich ersetzen kann: Du kennst deine Community. Ein Gespräch am Anfang, kurzes Feedback zu den Entwürfen, die finale Freigabe — und zum Launch stellst du das Produkt deinen Followern vor."],
-  ["Was heißt 50/50 genau?", "Vom Gewinn aus jedem Verkauf — also dem Erlös nach Zahlungsgebühren und Steuern — geht die Hälfte an dich und die Hälfte an code nach maß. Die Abrechnung ist für dich nachvollziehbar, und alle Details halten wir schriftlich fest, bevor es losgeht."],
+  ["Was heißt 50/50 genau?", "Vom Gewinn aus jedem Verkauf — also dem Erlös nach Zahlungsgebühren und Steuern — geht die Hälfte an dich und die Hälfte an code nach maß. Alle Details halten wir schriftlich fest, bevor es losgeht."],
+  ["Wie sehe ich meine Verkaufszahlen?", "Du bekommst einen eigenen Login zu deinem persönlichen Dashboard. Dort siehst du jederzeit Verkäufe, Umsatz und deinen Anteil — direkt aus dem Verkaufssystem, nicht aus einer Tabelle von mir. Du siehst ausschließlich deine eigenen Zahlen, und niemand sonst sieht deine."],
+  ["Wem gehört das Produkt?", "Dein Name, dein Gesicht und deine Marke gehören immer dir. Das Produkt selbst ist ein Gemeinschaftsprodukt: Es wird nur gemeinsam und nur unter deinem Namen verkauft, ohne deine Zustimmung passiert nichts. Wie es weitergeht, falls wir uns einmal trennen, steht klar in unserer Vereinbarung, bevor wir starten."],
+  ["Kann ich jederzeit aussteigen?", "Ja. Wenn du nicht mehr möchtest, sagst du Bescheid und die Produktion wird eingestellt — egal an welchem Punkt und ohne Kosten für dich. Auch nach dem Launch kannst du den Verkauf stoppen lassen. Wer bis dahin gekauft hat, behält seinen Zugang."],
   ["Was, wenn sich das Produkt nicht verkauft?", "Dann hast du nichts verloren. Du hast kein Geld investiert und kaum Zeit. Das Risiko der Erstellung trage ich — genau deshalb baue ich nur Produkte, von denen ich überzeugt bin, dass deine Community sie haben will."],
   ["Ich habe „nur“ 10.000 Follower. Lohnt sich das?", "Gerade dann. Kleine und mittlere Kanäle haben oft die engste Bindung zu ihrer Community. Entscheidend ist nicht die Zahl, sondern das Vertrauen — und ein Produkt, das wirklich passt."],
-  ["Passt ein Produkt überhaupt zu meinem Kanal?", "Du hast immer das letzte Wort. Nichts geht online, was du nicht freigegeben hast. Das Produkt trägt deinen Namen — also muss es sich für dich und deine Follower richtig anfühlen."],
   ["Was für Produkte sind möglich?", "Alles Digitale: E-Books und Guides, Vorlagen und Planer, Mini-Kurse, Challenges, Rechner und kleine Web-Apps. Was am besten passt, hängt von deiner Nische ab — das finden wir im ersten Gespräch heraus."],
 ];
+
+const WaIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20.5l1.7-5.2A8.5 8.5 0 1 1 21 11.5z" />
+  </svg>
+);
 
 export default function Home() {
   const [copied, setCopied] = useState(false);
@@ -65,11 +75,11 @@ export default function Home() {
         <div className="wrap navIn">
           <a href="#top" className="brand">code nach maß<span className="dot">.</span></a>
           <nav className="navlinks">
-            <a href="#idee">Die Idee</a>
-            <a href="#beispiele">Beispiele</a>
+            <a href="#muster">Beispiel</a>
+            <a href="#ideen">Ideen</a>
             <a href="#deal">Der Deal</a>
-            <a href="#rechner">Rechner</a>
             <a href="#ablauf">Ablauf</a>
+            <a href="#ueber">Über mich</a>
             <a href="#faq">FAQ</a>
             <a href="#kontakt" className="navcta">Kontakt</a>
           </nav>
@@ -78,25 +88,31 @@ export default function Home() {
 
       {/* HERO */}
       <section className="hero" id="top">
-        <div className="grid" aria-hidden="true" />
+        <div className="blob b1" aria-hidden="true" />
+        <div className="blob b2" aria-hidden="true" />
         <div className="wrap heroIn">
-          <span className="eyebrow" style={{ color: "var(--mint)" }}>Für Creator mit 10.000 – 100.000 Followern</span>
-          <h1 className="h1">Deine Community feiert dich.<br />Zeit für dein eigenes Produkt.<br /><span className="hl">Ich baue es für dich.</span></h1>
-          <div className="rule tall heroRule" style={{ color: "var(--mint)" }} />
-          <p className="lede">
-            Mit deinem Content gibst du deiner Community jeden Tag etwas mit. Ein eigenes digitales
-            Produkt ist der nächste Schritt — und ich entwickle es passgenau für deine Follower,
-            komplett auf meine Kosten. Verkauft es sich, teilen wir den Gewinn 50/50.
-          </p>
-          <div className="cta">
-            <a href="#kontakt" className="btn btnPrimary">Unverbindlich anfragen</a>
-            <a href="#beispiele" className="btn btnGhost">Produktideen ansehen</a>
+          <div>
+            <span className="eyebrow">Für Creator mit 10.000 – 100.000 Followern</span>
+            <h1 className="h1">Deine Community feiert dich.<br />Zeit für dein eigenes Produkt.<br /><span className="hl">Ich baue es für dich.</span></h1>
+            <p className="lede">
+              Mit deinem Content gibst du deiner Community jeden Tag etwas mit. Ein eigenes digitales
+              Produkt ist der nächste Schritt — und ich entwickle es passgenau für deine Follower,
+              komplett auf meine Kosten. Verkauft es sich, teilen wir den Gewinn 50/50.
+            </p>
+            <div className="cta">
+              <a href={WA} target="_blank" rel="noopener noreferrer" className="btn btnWa"><WaIcon /> Schreib mir auf WhatsApp</a>
+              <a href="#muster" className="btn btnGhost">Beispiel ansehen</a>
+            </div>
+            <div className="facts">
+              <div className="fact"><strong>0 €</strong><span>Kosten für dich</span></div>
+              <div className="fact"><strong>50 / 50</strong><span>Gewinn pro Verkauf</span></div>
+              <div className="fact"><strong>Hands-off</strong><span>Ich erstelle, du gibst frei</span></div>
+            </div>
           </div>
-          <div className="facts">
-            <div className="fact"><strong>0 €</strong><span>Kosten für dich</span></div>
-            <div className="fact"><strong>50 / 50</strong><span>Gewinn pro Verkauf</span></div>
-            <div className="fact"><strong>Hands-off</strong><span>Ich erstelle, du gibst frei</span></div>
-          </div>
+          <a href="#ueber" className="me">
+            <img src="/lukas.jpg" alt="Lukas Schmitz" width="720" height="900" />
+            <span className="meTxt"><strong>Hi, ich bin Lukas.</strong><span>Du schreibst immer direkt mit mir.</span></span>
+          </a>
         </div>
       </section>
 
@@ -104,43 +120,59 @@ export default function Home() {
       <section className="sec" id="idee">
         <div className="wrap">
           <span className="eyebrow">Die Idee</span>
-          <h2 className="h2">Die Community hast du schon.<br />Es fehlt nur noch das Produkt.</h2>
-          <p className="kosLede">
-            Deine Follower vertrauen dir und fragen dich längst nach Tipps, Plänen und Empfehlungen.
-            Ein eigenes Produkt gibt ihnen echten Mehrwert — und dir ein Einkommen, das nicht von
-            Kooperationen oder dem Algorithmus abhängt. Meist scheitert es nicht an der Idee, sondern
-            an Zeit, Technik und Aufwand. Genau den Teil übernehme ich.
-          </p>
+          <h2 className="h2">Die Community hast du schon.<br />Das Produkt bringe ich mit.</h2>
           <div className="three">
             <div className="pt">
-              <span className="ptLabel">01 — Maßgeschneidert</span>
-              <p>Kein Produkt von der Stange mit deinem Logo drauf. Wir schneiden es gemeinsam exakt auf deine Community zu — auf ihre Fragen, ihre Sprache, ihren Alltag.</p>
+              <span className="ptLabel">Maßgeschneidert</span>
+              <p>Kein Produkt von der Stange mit deinem Logo drauf. Wir schneiden es gemeinsam auf deine Community zu — auf ihre Fragen, ihre Sprache, ihren Alltag.</p>
             </div>
             <div className="pt">
-              <span className="ptLabel">02 — Ohne Risiko</span>
+              <span className="ptLabel">Ohne Risiko</span>
               <p>Du investierst kein Geld. Ich gehe mit der kompletten Erstellung in Vorleistung und verdiene nur, wenn du auch verdienst.</p>
             </div>
             <div className="pt">
-              <span className="ptLabel">03 — Ohne Aufwand</span>
+              <span className="ptLabel">Ohne Aufwand</span>
               <p>Du machst weiter das, was du am besten kannst: Content. Ich brauche dich nur für das, was niemand sonst weiß — was deine Follower wirklich wollen.</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* BEISPIELE */}
-      <section className="sec secAlt" id="beispiele">
+      {/* MUSTER-PRODUKT */}
+      <section className="sec secAlt" id="muster">
+        <div className="wrap muster">
+          <div>
+            <span className="eyebrow">Muster-Produkt zum Ausprobieren</span>
+            <h2 className="h2">So könnte dein Produkt aussehen.</h2>
+            <p className="kosLede">
+              Ein Beispiel für einen Food-Kanal: ein Meal-Prep-Planer mit deinen Rezepten. Deine
+              Follower stellen sich ihre Woche zusammen und bekommen die Einkaufsliste automatisch.
+              Probier es aus — tausche Gerichte, ändere die Portionen, hake die Liste ab.
+            </p>
+            <ul className="checks">
+              <li>Dein Name, deine Farben, deine Sprache</li>
+              <li>Deine Rezepte, Pläne oder Tipps als Inhalt</li>
+              <li>Läuft auf jedem Handy, ohne App-Download</li>
+              <li>Für jede Nische ein anderes Produkt — das hier ist nur eins von vielen</li>
+            </ul>
+            <p className="demoNote">Muster zur Veranschaulichung. Deine Eingaben bleiben in deinem Browser.</p>
+          </div>
+          <MealPrepDemo />
+        </div>
+      </section>
+
+      {/* IDEEN */}
+      <section className="sec" id="ideen">
         <div className="wrap">
           <span className="eyebrow">Was wir bauen könnten</span>
           <h2 className="h2">Produktideen für deine Nische.</h2>
           <p className="kosLede">
-            Ein paar Beispiele, wie ein digitales Produkt für deine Community aussehen kann. Am Ende
-            entsteht kein Standardprodukt, sondern eines, das es so nur bei dir gibt.
+            Am Ende entsteht kein Standardprodukt, sondern eines, das es so nur bei dir gibt.
           </p>
+          <p className="swipe" aria-hidden="true">wischen für mehr →</p>
           <div className="niches">
             {NICHES.map(([t, items]) => (
               <div className="card" key={t}>
-                <div className="cardTick" aria-hidden="true" />
                 <h3 className="cardT">{t}</h3>
                 <ul className="ideas">
                   {items.map((i) => <li key={i}>{i}</li>)}
@@ -149,22 +181,19 @@ export default function Home() {
             ))}
           </div>
           <p className="nicheNote">
-            Deine Nische ist nicht dabei? Umso besser — <a href="#kontakt">schreib mir</a>, und ich
+            Deine Nische ist nicht dabei? Umso besser — <a href={WA} target="_blank" rel="noopener noreferrer">schreib mir</a>, und ich
             schicke dir konkrete Ideen für deinen Kanal.
           </p>
         </div>
       </section>
 
       {/* DEAL */}
-      <section className="sec" id="deal">
+      <section className="sec secAlt" id="deal">
         <div className="wrap">
           <span className="eyebrow">Der Deal</span>
           <h2 className="h2">Ich übernehme alles.<br />Wir teilen den Gewinn.</h2>
           <p className="kosLede">
-            Wer ein digitales Produkt alleine auf die Beine stellt, braucht Wochen an Zeit, mehrere
-            Tools und oft bezahlte Hilfe. Mit code nach maß bekommst du das fertige Produkt — ohne
-            einen Cent zu zahlen. Ich verdiene nur, wenn du verdienst. Deshalb will ich genauso wie du,
-            dass es richtig gut wird.
+            Ich verdiene nur, wenn du verdienst. Deshalb will ich genauso wie du, dass es richtig gut wird.
           </p>
           <div className="compare">
             <div className="col colOld">
@@ -191,10 +220,9 @@ export default function Home() {
 
           <h3 className="advSubhead">Das übernehme ich für dich.</h3>
           <div className="advGrid">
-            {TAKEOVER.map(([t, d], i) => (
+            {TAKEOVER.map(([t, d]) => (
               <div className="advCard" key={t}>
-                <span className="advN">{String(i + 1).padStart(2, "0")}</span>
-                <h4>{t}</h4>
+                <h4><span className="mk mkYes">✓</span> {t}</h4>
                 <p>{d}</p>
               </div>
             ))}
@@ -206,18 +234,11 @@ export default function Home() {
               zum Start erzählst du deiner Community davon. Mehr nicht.
             </p>
           </div>
-        </div>
-      </section>
 
-      {/* RECHNER */}
-      <section className="sec secAlt" id="rechner">
-        <div className="wrap">
-          <span className="eyebrow">Beispielrechnung</span>
-          <h2 className="h2">Was könnte für dich drin sein?</h2>
-          <p className="kosLede">
-            Schon wenn nur ein kleiner Teil deiner Follower kauft, kommt etwas zusammen. Stell die
-            Regler auf deinen Kanal ein und spiel es durch.
-          </p>
+          <div id="rechner" className="calcHead">
+            <h3 className="advSubhead">Was könnte für dich drin sein?</h3>
+            <p className="kosLede">Stell die Regler auf deinen Kanal ein und spiel es durch.</p>
+          </div>
           <div className="calc">
             <div className="calcIn">
               <label className="fld">
@@ -255,12 +276,12 @@ export default function Home() {
         <div className="wrap">
           <span className="eyebrow">So läuft es ab</span>
           <h2 className="h2">In vier Schritten zu deinem Produkt.</h2>
-          <div className="steps steps4">
+          <div className="steps">
             {[
-              ["01", "Kennenlernen", "15 Minuten, unverbindlich. Du erzählst von deinem Kanal und deiner Community, ich bringe erste Produktideen mit."],
-              ["02", "Idee festlegen", "Wir entscheiden gemeinsam, was deinen Followern am meisten bringt. Du weißt, was sie dich immer wieder fragen — das ist die beste Vorlage."],
-              ["03", "Ich baue", "Du lehnst dich zurück. Ich erstelle Produkt, Verkaufsseite und Technik. Zwischendurch schaust du drauf und sagst, was noch besser zu deiner Community passt."],
-              ["04", "Launch & teilen", "Du stellst das Produkt vor, ich kümmere mich um Verkauf, Auslieferung und Support. Den Gewinn teilen wir 50/50."],
+              ["1", "Kennenlernen", "15 Minuten, unverbindlich. Du erzählst von deinem Kanal, ich bringe erste Produktideen mit."],
+              ["2", "Idee festlegen", "Wir entscheiden gemeinsam, was deinen Followern am meisten bringt. Du weißt, was sie dich immer wieder fragen."],
+              ["3", "Ich baue", "Du lehnst dich zurück. Zwischendurch schaust du drauf und sagst, was noch besser zu deiner Community passt."],
+              ["4", "Launch & teilen", "Du stellst das Produkt vor, ich kümmere mich um Verkauf, Auslieferung und Support. Den Gewinn teilen wir 50/50."],
             ].map(([n, t, d]) => (
               <div className="step" key={n}>
                 <span className="stepN">{n}</span>
@@ -274,8 +295,44 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ÜBER MICH */}
+      <section className="sec secAlt" id="ueber">
+        <div className="wrap about">
+          <img className="aboutImg" src="/lukas.jpg" alt="Lukas Schmitz" width="720" height="900" loading="lazy" />
+          <div>
+            <span className="eyebrow">Über mich</span>
+            <h2 className="h2">Hi, ich bin Lukas.</h2>
+            <div className="aboutTxt">
+              <p>
+                Ich bin Entwickler aus Düsseldorf und komme ursprünglich aus der Wirtschaftsprüfung.
+                Heute baue ich digitale Produkte — und zwar am liebsten für Menschen, die sich etwas
+                Eigenes aufgebaut haben.
+              </p>
+              <p>
+                <strong>Warum ich das mache:</strong> Ich sehe so viele Creator, die mit Herzblut eine
+                Community aufgebaut haben und ihr jeden Tag etwas mitgeben. Verdient wird daran aber
+                oft vor allem woanders — bei Marken, Plattformen und Agenturen. Ich finde, das geht
+                besser. Du hast das Vertrauen deiner Community, ich kann Produkte bauen. Zusammen
+                entsteht etwas, das keiner von uns alleine so hinbekommen würde.
+              </p>
+              <p>
+                <strong>Warum 50/50:</strong> Ich will keine Rechnung schreiben und dann verschwinden.
+                Ich verdiene nur, wenn du verdienst — wir sitzen also im selben Boot. Und weil ich aus
+                der Welt der Zahlen komme, ist eine saubere, für dich jederzeit einsehbare Abrechnung
+                für mich selbstverständlich.
+              </p>
+              <p>
+                Du arbeitest nicht mit einer Agentur, sondern direkt mit mir. Wenn du eine Frage hast,
+                schreibst du mir einfach.
+              </p>
+            </div>
+            <a href={WA} target="_blank" rel="noopener noreferrer" className="btn btnWa"><WaIcon /> Schreib mir auf WhatsApp</a>
+          </div>
+        </div>
+      </section>
+
       {/* FAQ */}
-      <section className="sec secAlt" id="faq">
+      <section className="sec" id="faq">
         <div className="wrap">
           <span className="eyebrow">Häufige Fragen</span>
           <h2 className="h2">Klingt zu gut? Hier sind die Antworten.</h2>
@@ -293,31 +350,27 @@ export default function Home() {
       {/* KONTAKT */}
       <section className="kontakt" id="kontakt">
         <div className="wrap kontaktIn">
-          <span className="eyebrow" style={{ color: "var(--mint)" }}>Kontakt</span>
+          <span className="eyebrow" style={{ color: "var(--glow)" }}>Kontakt</span>
           <h2 className="h2 kH">Lass uns herausfinden, was zu deiner Community passt.</h2>
           <p className="kLede">
             Schick mir einfach den Link zu deinem Kanal. Ich melde mich mit konkreten Produktideen
             für deine Community — kostenlos und unverbindlich.
           </p>
           <div className="kBtns">
-            <a href={MAILTO} className="btn btnMint">E-Mail schreiben</a>
-            <button type="button" className="copyChip" onClick={copyMail} aria-label="E-Mail-Adresse kopieren">
-              <span className="copyMail">{MAIL}</span>
-              <span className="copyIco">{copied ? "✓ Kopiert" : "kopieren"}</span>
-            </button>
+            <a href={WA} target="_blank" rel="noopener noreferrer" className="btn btnWa btnBig"><WaIcon /> Schreib mir auf WhatsApp</a>
+            <span className="or">oder per E-Mail</span>
+            <div className="mailRow">
+              <a href={MAILTO} className="mailLink">{MAIL}</a>
+              <button type="button" className="copyChip" onClick={copyMail} aria-label="E-Mail-Adresse kopieren">{copied ? "✓ Kopiert" : "kopieren"}</button>
+            </div>
           </div>
-          <p className="kBy">
-            Hinter code nach maß steht <strong>Lukas Schmitz</strong>, Entwickler aus Düsseldorf —
-            zuvor in der Wirtschaftsprüfung. Saubere Zahlen und eine transparente Abrechnung sind für
-            mich selbstverständlich.
-          </p>
         </div>
       </section>
 
       {/* FOOTER */}
       <footer className="foot">
         <div className="wrap footIn">
-          <span className="brand">code nach maß<span className="dot">.</span></span>
+          <span className="brand brandD">code nach maß<span className="dot">.</span></span>
           <div className="footLinks">
             <a href="/impressum">Impressum</a>
             <a href="/datenschutz">Datenschutz</a>
@@ -326,149 +379,202 @@ export default function Home() {
         </div>
       </footer>
 
+      <a href={WA} target="_blank" rel="noopener noreferrer" className="waFloat" aria-label="Auf WhatsApp schreiben"><WaIcon /><span>WhatsApp</span></a>
+
       <style jsx>{`
-        .nav{position:sticky;top:0;z-index:40;background:rgba(15,26,36,.82);backdrop-filter:blur(10px);border-bottom:1px solid var(--lineD)}
+        .nav{position:sticky;top:0;z-index:40;background:rgba(251,245,236,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
         .navIn{display:flex;align-items:center;justify-content:space-between;height:62px}
-        .brand{font-family:var(--mono);font-weight:600;font-size:15px;color:#fff;letter-spacing:-0.01em}
-        .dot{color:var(--mint)}
-        .navlinks{display:flex;align-items:center;gap:26px}
-        .navlinks a{font-size:14px;color:var(--mutedD);transition:color .15s}
-        .navlinks a:hover{color:#fff}
-        .navcta{color:#fff!important;border:1px solid var(--lineD);padding:7px 14px;border-radius:8px}
-        .navcta:hover{background:var(--accent);border-color:var(--accent)}
+        .brand{font-family:var(--disp);font-weight:700;font-size:18px;color:var(--ink);letter-spacing:-0.02em}
+        .brandD{color:#fff}
+        .dot{color:var(--accent)}
+        .navlinks{display:flex;align-items:center;gap:24px}
+        .navlinks a{font-size:14.5px;color:var(--muted);transition:color .15s}
+        .navlinks a:hover{color:var(--ink)}
+        .navcta{color:#fff!important;background:var(--ink);padding:8px 16px;border-radius:999px;font-weight:600}
+        .navcta:hover{background:var(--accent)}
 
-        .hero{position:relative;background:var(--ink);color:#fff;overflow:hidden;padding:96px 0 84px}
-        .grid{position:absolute;inset:0;background-image:linear-gradient(var(--lineD) 1px,transparent 1px),linear-gradient(90deg,var(--lineD) 1px,transparent 1px);background-size:48px 48px;opacity:.28;mask-image:radial-gradient(120% 90% at 20% 0%,#000 30%,transparent 78%)}
-        .heroIn{position:relative}
-        .h1{font-size:clamp(32px,5.6vw,64px);font-weight:600;margin-top:14px}
-        .heroRule{max-width:320px;margin:26px 0}
-        .lede{max-width:620px;font-size:clamp(17px,2.1vw,20px);color:#D6E0E4}
-        .cta{display:flex;gap:12px;flex-wrap:wrap;margin:30px 0 34px}
-        .btn{display:inline-block;font-weight:600;font-size:15px;padding:13px 22px;border-radius:11px;transition:transform .12s,background .15s,border-color .15s}
+        .hero{position:relative;overflow:hidden;padding:72px 0 76px;background:linear-gradient(180deg,#FFF3E4 0%,var(--paper) 100%)}
+        .blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.55;pointer-events:none}
+        .b1{width:420px;height:420px;background:#FFC9A3;top:-140px;right:-80px}
+        .b2{width:320px;height:320px;background:#FFE3A8;bottom:-160px;left:-100px}
+        .heroIn{position:relative;display:grid;grid-template-columns:1.8fr .75fr;gap:40px;align-items:center}
+        .h1{font-size:clamp(30px,3.7vw,44px);font-weight:600;margin-top:16px;text-wrap:balance}
+        .hl{color:var(--accent)}
+        .lede{max-width:600px;font-size:clamp(16.5px,1.9vw,19px);color:var(--muted);margin-top:22px}
+        .cta{display:flex;gap:12px;flex-wrap:wrap;margin:28px 0 30px}
+        .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-weight:600;font-size:15.5px;padding:14px 22px;border-radius:999px;transition:transform .12s,background .15s,border-color .15s,box-shadow .15s}
         .btn:active{transform:translateY(1px)}
-        .btnPrimary{background:var(--mint);color:var(--ink)}
-        .btnPrimary:hover{background:#5AD9C8}
-        .btnGhost{color:#fff;border:1px solid var(--lineD)}
-        .btnGhost:hover{border-color:var(--mint);color:var(--mint)}
-        .trust{max-width:640px;font-size:14.5px;color:var(--mutedD);border-left:2px solid var(--accent);padding-left:16px}
-        .trust strong{color:#fff;font-weight:600}
+        .btnWa{background:var(--wa);color:#06321A;box-shadow:0 10px 24px rgba(37,211,102,.28)}
+        .btnWa:hover{background:#3BE07A}
+        .btnBig{font-size:17px;padding:16px 28px}
+        .btnGhost{color:var(--ink);border:1.5px solid var(--ink)}
+        .btnGhost:hover{background:var(--ink);color:#fff}
+        .facts{display:flex;flex-wrap:wrap;gap:12px}
+        .fact{border:1px solid var(--line);border-radius:16px;padding:13px 18px;background:rgba(255,255,255,.8);min-width:160px}
+        .fact strong{display:block;font-family:var(--disp);font-size:23px;font-weight:600;color:var(--accent);letter-spacing:-0.01em}
+        .fact span{font-size:13.5px;color:var(--muted)}
+        .me{display:block;background:#fff;border-radius:26px;padding:10px 10px 0;box-shadow:0 24px 50px rgba(42,29,23,.16);transform:rotate(2deg);transition:transform .2s}
+        .me:hover{transform:rotate(0deg)}
+        .me img{border-radius:18px;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover}
+        .meTxt{display:block;padding:12px 8px 14px}
+        .meTxt strong{display:block;font-family:var(--disp);font-size:17px}
+        .meTxt span{font-size:13.5px;color:var(--muted)}
 
-        .sec{padding:84px 0}
+        .sec{padding:80px 0}
         .secAlt{background:var(--panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-        .h2{font-size:clamp(26px,3.6vw,40px);margin:14px 0 0;max-width:760px}
+        .h2{font-size:clamp(25px,3.4vw,38px);margin:12px 0 0;max-width:760px}
+        .kosLede{max-width:640px;margin:14px 0 0;color:var(--muted);font-size:16.5px}
 
-        .three{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:44px}
-        .ptLabel{font-family:var(--mono);font-size:12.5px;font-weight:600;color:var(--accent);letter-spacing:.04em}
-        .pt p{margin-top:12px;color:var(--muted);font-size:15.5px}
+        .three{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:36px}
+        .pt{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:22px}
+        .ptLabel{font-family:var(--disp);font-size:18px;font-weight:600;color:var(--accent)}
+        .pt p{margin-top:8px;color:var(--muted);font-size:15.5px}
 
-        .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:44px}
-        .card{position:relative;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:26px 24px;overflow:hidden;transition:transform .15s,box-shadow .15s}
-        .card:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(15,26,36,.09)}
-        .cardTick{position:absolute;top:0;left:0;right:0;height:16px;color:var(--accent);background-image:repeating-linear-gradient(90deg,currentColor 0 1.4px,transparent 1.4px 10px);opacity:.32}
-        .cardT{font-size:19px;margin:14px 0 0}
-        .cardD{margin-top:10px;color:var(--muted);font-size:15px}
+        .muster{display:grid;grid-template-columns:1fr 400px;gap:56px;align-items:center}
+        .checks{list-style:none;padding:0;margin:22px 0 0}
+        .checks li{position:relative;padding:7px 0 7px 30px;font-size:15.5px}
+        .checks li::before{content:"✓";position:absolute;left:0;top:7px;width:21px;height:21px;border-radius:50%;background:var(--accentSoft);color:var(--accent);font-size:12.5px;font-weight:700;display:grid;place-items:center}
+        .demoNote{margin-top:18px;font-size:13px;color:var(--muted)}
 
-        .kosLede{max-width:660px;margin:14px 0 0;color:var(--muted);font-size:16px}
-        .compare{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:34px}
-        .col{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:26px 24px}
-        .colNew{border-color:var(--accent);box-shadow:0 14px 34px rgba(15,110,107,.12)}
-        .colTag{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+        .swipe{display:none}
+        .niches{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px}
+        .card{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:22px;transition:transform .15s,box-shadow .15s}
+        .card:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(42,29,23,.09)}
+        .cardT{font-size:18.5px}
+        .ideas{list-style:none;padding:0;margin:12px 0 0}
+        .ideas li{position:relative;padding:8px 0 8px 20px;font-size:14.5px;color:var(--muted);border-top:1px solid var(--lineSoft)}
+        .ideas li:first-child{border-top:none}
+        .ideas li::before{content:"→";position:absolute;left:0;color:var(--accent);font-size:13px}
+        .nicheNote{margin-top:24px;color:var(--muted);font-size:15.5px}
+        .nicheNote a{color:var(--accent);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+
+        .compare{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:32px}
+        .col{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:24px}
+        .colNew{background:#fff;border:2px solid var(--accent);box-shadow:0 14px 34px rgba(194,69,30,.13)}
+        .colTag{font-size:12.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
         .colTagNew{color:var(--accent)}
-        .col ul{list-style:none;padding:0;margin:16px 0 0}
+        .col ul{list-style:none;padding:0;margin:14px 0 0}
         .col li{display:flex;align-items:flex-start;gap:11px;padding:9px 0;font-size:15px;color:var(--ink);border-top:1px solid var(--lineSoft)}
         .col li:first-child{border-top:none}
         .colOld li{color:var(--muted)}
-        .mk{font-family:var(--mono);font-weight:700;flex-shrink:0;font-size:14px;line-height:1.5}
-        .mkNo{color:#B5271F}
+        .mk{font-weight:700;flex-shrink:0;font-size:14px;line-height:1.6}
+        .mkNo{color:#A8A096}
         .mkYes{color:var(--accent)}
-        .advSubhead{font-family:var(--disp);font-size:clamp(19px,2.4vw,25px);font-weight:600;letter-spacing:-0.01em;margin:48px 0 0}
-        .advGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
-        .advCard{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px}
-        .advN{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--accent);letter-spacing:.04em}
-        .advCard h4{font-family:var(--disp);font-size:16.5px;font-weight:600;margin:10px 0 0;letter-spacing:-0.01em}
+        .advSubhead{font-family:var(--disp);font-size:clamp(20px,2.4vw,26px);font-weight:600;letter-spacing:-0.01em;margin:48px 0 0}
+        .advGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}
+        .advCard{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:18px 20px}
+        .advCard h4{font-family:var(--disp);font-size:16.5px;font-weight:600;margin:0;letter-spacing:-0.01em}
         .advCard p{margin-top:8px;color:var(--muted);font-size:14.5px}
-        @media (max-width:900px){ .advGrid{grid-template-columns:1fr 1fr} }
-        @media (max-width:620px){ .advGrid{grid-template-columns:1fr} }
+        .yours{margin-top:20px;display:flex;gap:18px;align-items:flex-start;background:var(--ink);color:#F1E6DC;border-radius:20px;padding:22px 24px}
+        .yoursTag{flex-shrink:0;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);background:var(--glow);border-radius:999px;padding:5px 12px}
+        .yours p{font-size:15.5px}
 
-        .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:44px}
-        .step{display:flex;gap:16px}
-        .stepN{font-family:var(--mono);font-size:14px;font-weight:600;color:#fff;background:var(--accent);border-radius:9px;padding:6px 10px;height:fit-content}
+        .calcHead{scroll-margin-top:70px}
+        .calc{display:grid;grid-template-columns:1.1fr 1fr;gap:18px;margin-top:26px}
+        .calcIn{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:26px 24px;display:flex;flex-direction:column;gap:26px;justify-content:center}
+        .fld{display:block}
+        .fldTop{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:15px;color:var(--muted);margin-bottom:10px}
+        .fldTop output{font-weight:700;font-size:16px;color:var(--ink)}
+        .fld input{width:100%;accent-color:var(--accent);cursor:pointer;margin:0}
+        .calcOut{background:var(--ink);color:#fff;border-radius:20px;padding:26px 24px}
+        .row{display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--lineD);color:var(--mutedD);font-size:15px}
+        .row strong{font-weight:600;color:#fff;font-size:16px}
+        .total{padding-top:20px}
+        .total span{display:block;font-size:12.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--glow)}
+        .total strong{display:block;font-family:var(--disp);font-size:clamp(38px,5vw,54px);font-weight:600;letter-spacing:-0.02em;line-height:1.15;color:#fff}
+        .calcSub{margin-top:6px;font-size:14px;color:var(--mutedD)}
+        .calcNote{margin-top:14px;font-size:13px;color:var(--muted);max-width:760px}
+
+        .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:36px}
+        .step{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:22px}
+        .stepN{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;font-family:var(--disp);font-size:17px;font-weight:700;color:#fff;background:var(--accent);margin-bottom:14px}
         .stepT{font-size:18px}
         .stepD{margin-top:8px;color:var(--muted);font-size:15px}
 
-        .kontakt{background:var(--ink);color:#fff;padding:92px 0}
-        .kontaktIn{text-align:center}
-        .kH{margin-left:auto;margin-right:auto}
-        .kLede{max-width:560px;margin:16px auto 30px;color:#D6E0E4;font-size:17px}
-        .btnMint{background:var(--mint);color:var(--ink);font-family:var(--mono);font-size:16px}
-        .btnMint:hover{background:#5AD9C8}
-        .kBtns{display:flex;flex-direction:column;align-items:center;gap:14px}
-        .copyChip{display:inline-flex;align-items:center;gap:12px;background:transparent;border:1px solid var(--lineD);border-radius:11px;padding:10px 15px;cursor:pointer;font-family:var(--mono);transition:border-color .15s}
-        .copyChip:hover{border-color:var(--mint)}
-        .copyMail{color:#fff;font-size:14.5px}
-        .copyIco{font-size:11.5px;color:var(--mint);letter-spacing:.05em;text-transform:uppercase;min-width:64px;text-align:left}
+        .about{display:grid;grid-template-columns:340px 1fr;gap:56px;align-items:center}
+        .aboutImg{border-radius:26px;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;box-shadow:0 24px 50px rgba(42,29,23,.16)}
+        .aboutTxt{margin:18px 0 26px;display:flex;flex-direction:column;gap:14px;max-width:620px}
+        .aboutTxt p{color:var(--muted);font-size:16px}
+        .aboutTxt strong{color:var(--ink)}
 
-        .foot{background:var(--ink2);color:var(--mutedD);padding:26px 0;border-top:1px solid var(--lineD)}
-        .footIn{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
-        .footLinks{display:flex;align-items:center;gap:20px;font-size:14px}
-        .footLinks a:hover{color:#fff}
-        .footC{color:#5B6D77}
-
-
-        .hl{color:var(--mint)}
-        .facts{display:flex;flex-wrap:wrap;gap:14px}
-        .fact{border:1px solid var(--lineD);border-radius:12px;padding:14px 18px;background:rgba(22,36,47,.7);min-width:170px}
-        .fact strong{display:block;font-family:var(--disp);font-size:24px;font-weight:600;color:var(--mint);letter-spacing:-0.01em}
-        .fact span{font-size:13.5px;color:var(--mutedD)}
-
-        .niches{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:40px}
-        .ideas{list-style:none;padding:0;margin:14px 0 0}
-        .ideas li{position:relative;padding:8px 0 8px 20px;font-size:14.5px;color:var(--muted);border-top:1px solid var(--line)}
-        .ideas li:first-child{border-top:none}
-        .ideas li::before{content:"→";position:absolute;left:0;color:var(--accent);font-family:var(--mono);font-size:13px}
-        .nicheNote{margin-top:26px;color:var(--muted);font-size:15.5px}
-        .nicheNote a{color:var(--accent);font-weight:600;text-decoration:underline;text-underline-offset:3px}
-
-        .yours{margin-top:22px;display:flex;gap:18px;align-items:flex-start;background:var(--ink);color:#D6E0E4;border-radius:14px;padding:22px 24px}
-        .yoursTag{flex-shrink:0;font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);background:var(--mint);border-radius:7px;padding:5px 10px}
-        .yours p{font-size:15.5px}
-
-        .calc{display:grid;grid-template-columns:1.1fr 1fr;gap:20px;margin-top:34px}
-        .calcIn{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:26px 24px;display:flex;flex-direction:column;gap:26px;justify-content:center}
-        .fld{display:block}
-        .fldTop{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:15px;color:var(--muted);margin-bottom:10px}
-        .fldTop output{font-family:var(--mono);font-weight:600;font-size:16px;color:var(--ink)}
-        .fld input{width:100%;accent-color:var(--accent);cursor:pointer;margin:0}
-        .calcOut{background:var(--ink);color:#fff;border-radius:16px;padding:26px 24px}
-        .row{display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--lineD);color:var(--mutedD);font-size:15px}
-        .row strong{font-family:var(--mono);font-weight:600;color:#fff;font-size:16px}
-        .total{padding-top:20px}
-        .total span{display:block;font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--mint)}
-        .total strong{display:block;font-family:var(--disp);font-size:clamp(38px,5vw,54px);font-weight:600;letter-spacing:-0.02em;line-height:1.15;color:#fff}
-        .calcSub{margin-top:6px;font-size:14px;color:var(--mutedD)}
-        .calcNote{margin-top:14px;font-family:var(--mono);font-size:12.5px;color:var(--muted);max-width:760px}
-
-        .steps4{grid-template-columns:repeat(2,1fr);gap:30px 36px}
-
-        .faq{margin-top:34px;max-width:820px;border-top:1px solid var(--line)}
+        .faq{margin-top:30px;max-width:820px;border-top:1px solid var(--line)}
         .qa{border-bottom:1px solid var(--line)}
         .qa summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 0;font-family:var(--disp);font-weight:600;font-size:17.5px;letter-spacing:-0.01em}
         .qa summary::-webkit-details-marker{display:none}
-        .qa summary::after{content:"+";font-family:var(--mono);font-size:20px;color:var(--accent);flex-shrink:0}
+        .qa summary::after{content:"+";font-size:22px;color:var(--accent);flex-shrink:0}
         .qa[open] summary::after{content:"–"}
         .qa p{padding:0 0 20px;color:var(--muted);font-size:15.5px;max-width:720px}
 
-        .kBy{max-width:560px;margin:34px auto 0;font-size:14px;color:var(--mutedD)}
-        .kBy strong{color:#fff;font-weight:600}
-        @media (max-width:1000px){ .niches{grid-template-columns:1fr 1fr} }
-        @media (max-width:620px){ .compare{grid-template-columns:1fr} .yours{flex-direction:column;gap:12px} .fact{flex:1 1 100%} }
+        .kontakt{background:var(--ink);color:#fff;padding:88px 0}
+        .kontaktIn{text-align:center}
+        .kH{margin-left:auto;margin-right:auto}
+        .kLede{max-width:560px;margin:16px auto 30px;color:#EADBCF;font-size:17px}
+        .kBtns{display:flex;flex-direction:column;align-items:center;gap:14px}
+        .or{font-size:13.5px;color:var(--mutedD)}
+        .mailRow{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:center}
+        .mailLink{color:#fff;font-weight:600;text-decoration:underline;text-underline-offset:4px}
+        .copyChip{background:transparent;border:1px solid var(--lineD);border-radius:999px;padding:6px 13px;cursor:pointer;font:600 12px var(--sans);color:var(--glow);letter-spacing:.04em;text-transform:uppercase;transition:border-color .15s}
+        .copyChip:hover{border-color:var(--glow)}
 
+        .foot{background:var(--ink2);color:var(--mutedD);padding:26px 0 26px;border-top:1px solid var(--lineD)}
+        .footIn{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
+        .footLinks{display:flex;align-items:center;gap:20px;font-size:14px}
+        .footLinks a:hover{color:#fff}
+        .footC{color:#9C8A7E}
+
+        .waFloat{position:fixed;right:18px;bottom:18px;z-index:50;display:inline-flex;align-items:center;gap:8px;background:var(--wa);color:#06321A;font-weight:700;font-size:14.5px;padding:13px 18px;border-radius:999px;box-shadow:0 12px 28px rgba(0,0,0,.25);transition:transform .15s}
+        .waFloat:hover{transform:translateY(-2px)}
+
+        @media (max-width:1000px){
+          .steps{grid-template-columns:1fr 1fr}
+          .advGrid{grid-template-columns:1fr 1fr}
+          .muster{grid-template-columns:1fr;gap:36px}
+        }
         @media (max-width:820px){
-          .three,.cards,.steps,.niches,.calc{grid-template-columns:1fr}
-          .hero{padding:72px 0 64px}
-          .sec{padding:64px 0}
-          .navlinks{gap:16px}
           .navlinks a:not(.navcta){display:none}
+          .hero{padding:36px 0 44px}
+          .heroIn{grid-template-columns:1fr;gap:26px}
+          .me{order:-1;display:flex;align-items:center;gap:12px;background:transparent;box-shadow:none;padding:0;transform:none}
+          .me img{width:54px;height:54px;aspect-ratio:1;border-radius:50%;object-position:50% 30%;border:2px solid #fff;box-shadow:0 6px 16px rgba(42,29,23,.18)}
+          .meTxt{padding:0}
+          .meTxt strong{font-size:15.5px}
+          .h1{margin-top:12px}
+          .cta{margin:22px 0 22px}
+          .cta .btn{flex:1 1 100%}
+          .facts{gap:8px;flex-wrap:nowrap}
+          .fact{min-width:0;flex:1;padding:10px 10px}
+          .fact strong{font-size:17px}
+          .fact span{font-size:11.5px;line-height:1.3;display:block}
+          .sec{padding:52px 0}
+          .three{grid-template-columns:1fr;gap:12px;margin-top:24px}
+          .pt{padding:18px}
+          .swipe{display:block;margin-top:16px;font-size:13px;color:var(--muted)}
+          .niches{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin:10px -24px 0;padding:0 24px 10px;scrollbar-width:none}
+          .niches::-webkit-scrollbar{display:none}
+          .card{flex:0 0 80%;scroll-snap-align:center}
+          .card:hover{transform:none;box-shadow:none}
+          .compare{grid-template-columns:1fr;gap:12px;margin-top:24px}
+          .colOld{order:2}
+          .advSubhead{margin-top:38px}
+          .advGrid{grid-template-columns:1fr;gap:0;margin-top:14px;background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:6px 18px}
+          .advCard{background:transparent;border:0;border-radius:0;padding:11px 0;border-top:1px solid var(--line)}
+          .advCard:first-child{border-top:0}
+          .advCard h4{font-size:15.5px}
+          .advCard p{display:none}
+          .yours{flex-direction:column;gap:12px}
+          .calc{grid-template-columns:1fr}
+          .steps{grid-template-columns:1fr;gap:10px;margin-top:24px}
+          .step{display:flex;gap:14px;padding:16px 18px}
+          .stepN{margin:0;flex-shrink:0}
+          .stepD{margin-top:4px}
+          .about{grid-template-columns:1fr;gap:24px}
+          .aboutImg{max-width:220px;border-radius:22px}
+          .about .btn{width:100%}
+          .kontakt{padding:60px 0 84px}
+          .btnBig{width:100%}
+          .waFloat{right:12px;bottom:12px;padding:13px}
+          .waFloat span{display:none}
+          .foot{padding-bottom:76px}
         }
       `}</style>
     </main>

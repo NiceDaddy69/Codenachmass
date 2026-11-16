@@ -134,7 +134,9 @@ export default function Home() {
                 Community aufgebaut haben und ihr jeden Tag etwas mitgeben. Verdient wird daran aber
                 oft vor allem woanders — bei Marken, Plattformen und Agenturen. Ich finde, das geht
                 besser. Du hast das Vertrauen deiner Community, ich kann Produkte bauen. Zusammen
-                entsteht etwas, das keiner von uns alleine so hinbekommen würde.
+                entsteht etwas, das deiner Community noch mehr Mehrwert bietet und dich unabhängiger
+                von Kooperationen macht. Und ja, ich verdiene dabei natürlich auch. Am Ende gewinnen
+                also alle drei: deine Community, du und ich.
               </p>
               <p>
                 <strong>Warum 50/50:</strong> Ich will keine Rechnung schreiben und dann verschwinden.

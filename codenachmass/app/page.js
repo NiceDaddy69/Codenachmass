@@ -75,11 +75,11 @@ export default function Home() {
         <div className="wrap navIn">
           <a href="#top" className="brand">code nach maß<span className="dot">.</span></a>
           <nav className="navlinks">
+            <a href="#ueber">Über mich</a>
             <a href="#muster">Beispiel</a>
             <a href="#ideen">Ideen</a>
             <a href="#deal">Der Deal</a>
             <a href="#ablauf">Ablauf</a>
-            <a href="#ueber">Über mich</a>
             <a href="#faq">FAQ</a>
             <a href="#kontakt" className="navcta">Kontakt</a>
           </nav>
@@ -116,24 +116,38 @@ export default function Home() {
         </div>
       </section>
 
-      {/* IDEE */}
-      <section className="sec" id="idee">
-        <div className="wrap">
-          <span className="eyebrow">Die Idee</span>
-          <h2 className="h2">Die Community hast du schon.<br />Das Produkt bringe ich mit.</h2>
-          <div className="three">
-            <div className="pt">
-              <span className="ptLabel">Maßgeschneidert</span>
-              <p>Kein Produkt von der Stange mit deinem Logo drauf. Wir schneiden es gemeinsam auf deine Community zu — auf ihre Fragen, ihre Sprache, ihren Alltag.</p>
+      {/* ÜBER MICH */}
+      <section className="sec" id="ueber">
+        <div className="wrap about">
+          <img className="aboutImg" src="/lukas.jpg" alt="Lukas Schmitz" width="720" height="900" loading="lazy" />
+          <div>
+            <span className="eyebrow">Über mich</span>
+            <h2 className="h2">Hi, ich bin Lukas.</h2>
+            <div className="aboutTxt">
+              <p>
+                Ich bin Entwickler aus Düsseldorf und komme ursprünglich aus der Wirtschaftsprüfung.
+                Heute baue ich digitale Produkte — und zwar am liebsten für Menschen, die sich etwas
+                Eigenes aufgebaut haben.
+              </p>
+              <p>
+                <strong>Warum ich das mache:</strong> Ich sehe so viele Creator, die mit Herzblut eine
+                Community aufgebaut haben und ihr jeden Tag etwas mitgeben. Verdient wird daran aber
+                oft vor allem woanders — bei Marken, Plattformen und Agenturen. Ich finde, das geht
+                besser. Du hast das Vertrauen deiner Community, ich kann Produkte bauen. Zusammen
+                entsteht etwas, das keiner von uns alleine so hinbekommen würde.
+              </p>
+              <p>
+                <strong>Warum 50/50:</strong> Ich will keine Rechnung schreiben und dann verschwinden.
+                Ich verdiene nur, wenn du verdienst — wir sitzen also im selben Boot. Und weil ich aus
+                der Welt der Zahlen komme, ist eine saubere, für dich jederzeit einsehbare Abrechnung
+                für mich selbstverständlich.
+              </p>
+              <p>
+                Du arbeitest nicht mit einer Agentur, sondern direkt mit mir. Wenn du eine Frage hast,
+                schreibst du mir einfach.
+              </p>
             </div>
-            <div className="pt">
-              <span className="ptLabel">Ohne Risiko</span>
-              <p>Du investierst kein Geld. Ich gehe mit der kompletten Erstellung in Vorleistung und verdiene nur, wenn du auch verdienst.</p>
-            </div>
-            <div className="pt">
-              <span className="ptLabel">Ohne Aufwand</span>
-              <p>Du machst weiter das, was du am besten kannst: Content. Ich brauche dich nur für das, was niemand sonst weiß — was deine Follower wirklich wollen.</p>
-            </div>
+            <a href={WA} target="_blank" rel="noopener noreferrer" className="btn btnWa"><WaIcon /> Schreib mir auf WhatsApp</a>
           </div>
         </div>
       </section>
@@ -145,17 +159,21 @@ export default function Home() {
             <span className="eyebrow">Muster-Produkt zum Ausprobieren</span>
             <h2 className="h2">So könnte dein Produkt aussehen.</h2>
             <p className="kosLede">
-              Ein Beispiel für einen Food-Kanal: ein Meal-Prep-Planer mit deinen Rezepten. Deine
-              Follower stellen sich ihre Woche zusammen und bekommen die Einkaufsliste automatisch.
-              Probier es aus — tausche Gerichte, ändere die Portionen, hake die Liste ab.
+              Ein Beispiel für einen Food-Kanal: ein Meal-Prep-Planer mit deinen Rezepten. Kein
+              PDF, sondern ein richtiges Werkzeug, das deine Follower jede Woche öffnen. Probier
+              es aus:
             </p>
             <ul className="checks">
-              <li>Dein Name, deine Farben, deine Sprache</li>
-              <li>Deine Rezepte, Pläne oder Tipps als Inhalt</li>
-              <li>Läuft auf jedem Handy, ohne App-Download</li>
-              <li>Für jede Nische ein anderes Produkt — das hier ist nur eins von vielen</li>
+              <li><strong>Ziel einstellen:</strong> Kalorien und Protein pro Mahlzeit festlegen, der Plan füllt sich passend</li>
+              <li><strong>Woche planen:</strong> Frühstück, Mittag und Abend für jeden Tag, jedes Gericht austauschbar</li>
+              <li><strong>Rezept antippen:</strong> Beschreibung, Zutaten, Zubereitung und Nährwerte</li>
+              <li><strong>Einkaufen:</strong> die Liste für die ganze Woche entsteht automatisch</li>
             </ul>
-            <p className="demoNote">Muster zur Veranschaulichung. Deine Eingaben bleiben in deinem Browser.</p>
+            <p className="mine">
+              Bei dir stehen dann dein Name, deine Farben und deine Inhalte drin — und für eine
+              andere Nische bauen wir ein ganz anderes Produkt.
+            </p>
+            <p className="demoNote">Muster zur Veranschaulichung mit Beispielwerten. Deine Eingaben bleiben in deinem Browser.</p>
           </div>
           <MealPrepDemo />
         </div>
@@ -227,14 +245,6 @@ export default function Home() {
               </div>
             ))}
           </div>
-          <div className="yours">
-            <span className="yoursTag">Dein Part</span>
-            <p>
-              Ein Kennenlerngespräch, kurzes Feedback zu den Entwürfen, die finale Freigabe — und
-              zum Start erzählst du deiner Community davon. Mehr nicht.
-            </p>
-          </div>
-
           <div id="rechner" className="calcHead">
             <h3 className="advSubhead">Was könnte für dich drin sein?</h3>
             <p className="kosLede">Stell die Regler auf deinen Kanal ein und spiel es durch.</p>
@@ -291,42 +301,6 @@ export default function Home() {
                 </div>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ÜBER MICH */}
-      <section className="sec secAlt" id="ueber">
-        <div className="wrap about">
-          <img className="aboutImg" src="/lukas.jpg" alt="Lukas Schmitz" width="720" height="900" loading="lazy" />
-          <div>
-            <span className="eyebrow">Über mich</span>
-            <h2 className="h2">Hi, ich bin Lukas.</h2>
-            <div className="aboutTxt">
-              <p>
-                Ich bin Entwickler aus Düsseldorf und komme ursprünglich aus der Wirtschaftsprüfung.
-                Heute baue ich digitale Produkte — und zwar am liebsten für Menschen, die sich etwas
-                Eigenes aufgebaut haben.
-              </p>
-              <p>
-                <strong>Warum ich das mache:</strong> Ich sehe so viele Creator, die mit Herzblut eine
-                Community aufgebaut haben und ihr jeden Tag etwas mitgeben. Verdient wird daran aber
-                oft vor allem woanders — bei Marken, Plattformen und Agenturen. Ich finde, das geht
-                besser. Du hast das Vertrauen deiner Community, ich kann Produkte bauen. Zusammen
-                entsteht etwas, das keiner von uns alleine so hinbekommen würde.
-              </p>
-              <p>
-                <strong>Warum 50/50:</strong> Ich will keine Rechnung schreiben und dann verschwinden.
-                Ich verdiene nur, wenn du verdienst — wir sitzen also im selben Boot. Und weil ich aus
-                der Welt der Zahlen komme, ist eine saubere, für dich jederzeit einsehbare Abrechnung
-                für mich selbstverständlich.
-              </p>
-              <p>
-                Du arbeitest nicht mit einer Agentur, sondern direkt mit mir. Wenn du eine Frage hast,
-                schreibst du mir einfach.
-              </p>
-            </div>
-            <a href={WA} target="_blank" rel="noopener noreferrer" className="btn btnWa"><WaIcon /> Schreib mir auf WhatsApp</a>
           </div>
         </div>
       </section>
@@ -425,16 +399,14 @@ export default function Home() {
         .h2{font-size:clamp(25px,3.4vw,38px);margin:12px 0 0;max-width:760px}
         .kosLede{max-width:640px;margin:14px 0 0;color:var(--muted);font-size:16.5px}
 
-        .three{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:36px}
-        .pt{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:22px}
-        .ptLabel{font-family:var(--disp);font-size:18px;font-weight:600;color:var(--accent)}
-        .pt p{margin-top:8px;color:var(--muted);font-size:15.5px}
 
         .muster{display:grid;grid-template-columns:1fr 400px;gap:56px;align-items:center}
+        .checks strong{font-weight:600}
         .checks{list-style:none;padding:0;margin:22px 0 0}
         .checks li{position:relative;padding:7px 0 7px 30px;font-size:15.5px}
         .checks li::before{content:"✓";position:absolute;left:0;top:7px;width:21px;height:21px;border-radius:50%;background:var(--accentSoft);color:var(--accent);font-size:12.5px;font-weight:700;display:grid;place-items:center}
-        .demoNote{margin-top:18px;font-size:13px;color:var(--muted)}
+        .mine{margin-top:16px;color:var(--muted);font-size:15.5px;max-width:560px}
+        .demoNote{margin-top:14px;font-size:13px;color:var(--muted)}
 
         .swipe{display:none}
         .niches{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px}
@@ -465,9 +437,6 @@ export default function Home() {
         .advCard{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:18px 20px}
         .advCard h4{font-family:var(--disp);font-size:16.5px;font-weight:600;margin:0;letter-spacing:-0.01em}
         .advCard p{margin-top:8px;color:var(--muted);font-size:14.5px}
-        .yours{margin-top:20px;display:flex;gap:18px;align-items:flex-start;background:var(--ink);color:#F1E6DC;border-radius:20px;padding:22px 24px}
-        .yoursTag{flex-shrink:0;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);background:var(--glow);border-radius:999px;padding:5px 12px}
-        .yours p{font-size:15.5px}
 
         .calcHead{scroll-margin-top:70px}
         .calc{display:grid;grid-template-columns:1.1fr 1fr;gap:18px;margin-top:26px}
@@ -546,8 +515,6 @@ export default function Home() {
           .fact strong{font-size:17px}
           .fact span{font-size:11.5px;line-height:1.3;display:block}
           .sec{padding:52px 0}
-          .three{grid-template-columns:1fr;gap:12px;margin-top:24px}
-          .pt{padding:18px}
           .swipe{display:block;margin-top:16px;font-size:13px;color:var(--muted)}
           .niches{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin:10px -24px 0;padding:0 24px 10px;scrollbar-width:none}
           .niches::-webkit-scrollbar{display:none}
@@ -561,7 +528,6 @@ export default function Home() {
           .advCard:first-child{border-top:0}
           .advCard h4{font-size:15.5px}
           .advCard p{display:none}
-          .yours{flex-direction:column;gap:12px}
           .calc{grid-template-columns:1fr}
           .steps{grid-template-columns:1fr;gap:10px;margin-top:24px}
           .step{display:flex;gap:14px;padding:16px 18px}

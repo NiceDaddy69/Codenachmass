@@ -25,10 +25,9 @@ export default function MusterBabyschlaf() {
               Probier es aus:
             </p>
             <ul className="checks">
-              <li><strong>Heute:</strong> Alter und Aufwachzeit eingeben und sehen, wann das Baby ungefähr müde wird — als Orientierung, nicht als Stundenplan</li>
-              <li><strong>Routine:</strong> eine Abendroutine zum Abhaken — mit klaren Aufgaben für Papa, gerade in der Stillzeit, bis zur Einschlafbegleitung</li>
+              <li><strong>Tipps:</strong> passend zum Alter des Babys, sortiert nach Einschlafen, Nachts, Tagsüber und „Für Papa“ — zum Aufklappen und Merken</li>
+              <li><strong>Abendroutine:</strong> zum Abhaken, mit klaren Aufgaben für Papa, gerade in der Stillzeit, bis zur Einschlafbegleitung</li>
               <li><strong>SOS:</strong> Schritt für Schritt durch den Moment, in dem das Baby nicht einschlafen will</li>
-              <li><strong>Wissen:</strong> was in welchem Alter normal ist und wie Babys sicher schlafen</li>
             </ul>
             <div className="next">
               <h2>Was daraus mit dir wird</h2>

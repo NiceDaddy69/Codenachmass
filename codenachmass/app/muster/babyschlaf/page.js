@@ -25,8 +25,9 @@ export default function MusterBabyschlaf() {
               Probier es aus:
             </p>
             <ul className="checks">
+              <li><strong>Schlaf:</strong> Schlaf per Knopfdruck festhalten, sehen, wie lange das Baby schon wach ist, und einen Hinweis bekommen, wann es wieder müde werden könnte — mit Wochenübersicht und Abendroutine</li>
+              <li><strong>Essen:</strong> Stillen mit Timer und Seite, Fläschchen und Beikost festhalten — und auf einen Blick sehen, wann das Baby zuletzt gegessen hat</li>
               <li><strong>Tipps:</strong> passend zum Alter des Babys, sortiert nach Einschlafen, Nachts, Tagsüber und „Für Papa“ — zum Aufklappen und Merken</li>
-              <li><strong>Abendroutine:</strong> zum Abhaken, mit klaren Aufgaben für Papa, gerade in der Stillzeit, bis zur Einschlafbegleitung</li>
               <li><strong>SOS:</strong> Schritt für Schritt durch den Moment, in dem das Baby nicht einschlafen will</li>
             </ul>
             <div className="next">
@@ -34,13 +35,13 @@ export default function MusterBabyschlaf() {
               <p>
                 Das hier ist ein Gerüst mit Beispielinhalten. Im echten Produkt stecken deine
                 Erfahrungen, deine Tipps und deine Sprache — und wir lassen die Inhalte fachlich
-                gegenlesen, zum Beispiel von einer Hebamme. Möglich wären außerdem ein
-                Schlafprotokoll, kurze Videos von dir zu einzelnen Schritten oder Kapitel zu
-                weiteren Themen wie Beikost und Zahnen.
+                gegenlesen, zum Beispiel von einer Hebamme. Möglich wären außerdem eine
+                gemeinsame Nutzung für beide Eltern, Erinnerungen, kurze Videos von dir zu
+                einzelnen Schritten oder Kapitel zu weiteren Themen wie Zahnen.
               </p>
             </div>
             <a href={WA} target="_blank" rel="noopener noreferrer" className="btn">Schreib mir, was du davon hältst</a>
-            <p className="note">Muster zur Veranschaulichung mit Orientierungswerten. Kein medizinischer Rat. Deine Eingaben bleiben in deinem Browser.</p>
+            <p className="note">Muster zur Veranschaulichung mit Orientierungs- und Beispielwerten. Kein medizinischer Rat. Deine Eingaben bleiben in deinem Browser und sind nach dem Neuladen wieder auf dem Beispielstand.</p>
           </div>
           <BabySleepDemo />
         </div>

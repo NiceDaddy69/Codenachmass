@@ -41,7 +41,7 @@ export default function MusterBabytakt() {
               </p>
             </div>
             <a href={WA} target="_blank" rel="noopener noreferrer" className="btn">Schreib mir, was du davon hältst</a>
-            <p className="note">Muster zur Veranschaulichung mit Orientierungs- und Beispielwerten. Kein medizinischer Rat. Deine Eingaben bleiben in deinem Browser und sind nach dem Neuladen wieder auf dem Beispielstand.</p>
+            <p className="note">Muster zur Veranschaulichung mit Orientierungs- und Beispielwerten. Kein medizinischer Rat. Deine Eingaben werden nur auf deinem Gerät gespeichert und nicht übertragen. Unter „Baby“ kannst du leer starten oder die Beispielwoche wieder laden.</p>
           </div>
           <Babytakt />
         </div>

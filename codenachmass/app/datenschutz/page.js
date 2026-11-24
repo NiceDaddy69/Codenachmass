@@ -58,11 +58,19 @@ export default function Datenschutz() {
           verwendet <strong>keine Tracking- oder Analyse-Dienste</strong> (z. B. kein Google Analytics).
         </p>
 
-        <h2 style={H2}>6. Beispielrechner und Muster-Produkt</h2>
+        <h2 style={H2}>6. Beispielrechner und Muster-Produkte</h2>
         <p style={P}>
           Der Beispielrechner und das Muster-Produkt (Meal-Prep-Planer) auf der Startseite laufen
           vollständig in Ihrem Browser. Die dort gemachten Eingaben werden <strong>weder gespeichert
           noch an mich oder Dritte übertragen</strong>.
+        </p>
+        <p style={P}>
+          Das Muster-Produkt „Babytakt“ (unter /muster/babytakt) speichert Ihre Eingaben, etwa
+          Schlaf- und Mahlzeiteneinträge, Name und Geburtsdatum des Babys, <strong>ausschließlich
+          lokal im Speicher Ihres Browsers</strong> (localStorage), damit sie beim nächsten Öffnen
+          noch da sind. Diese Daten werden <strong>nicht an mich oder Dritte übertragen</strong>.
+          Sie können sie in der Anwendung unter „Baby“ jederzeit löschen oder über die Einstellungen
+          Ihres Browsers entfernen.
         </p>
 
         <h2 style={H2}>7. Kontaktaufnahme per E-Mail</h2>

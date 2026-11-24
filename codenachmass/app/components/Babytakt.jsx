@@ -2,7 +2,8 @@
 import { useEffect, useState } from "react";
 
 /* Muster-Produkt „Babytakt“: Schlaf- und Ess-Tracker mit passenden Tipps, Soforthilfe und Bericht
-   für Eltern im ersten Jahr. Läuft komplett im Browser, nichts wird gespeichert oder übertragen.
+   für Eltern im ersten Jahr. Läuft komplett im Browser: Einträge werden nur auf diesem Gerät gespeichert
+   (localStorage) und nie übertragen.
    Alle Zeiten, Tipps und Daten sind Orientierungs- bzw. Beispielwerte; im echten Produkt kommen
    die Inhalte vom Creator und werden fachlich geprüft. */
 
@@ -161,7 +162,14 @@ const avg = (arr) => (arr.length ? arr.reduce((a, b) => a + b, 0) / arr.length :
 const overlap = (s, e, a, b) => Math.max(0, Math.min(e, b) - Math.max(s, a));
 const rnd = (n) => { const x = Math.sin(n * 12.9898) * 43758.5453; return x - Math.floor(x); };
 let _id = 0;
-const uid = () => `e${++_id}`;
+const uid = () => `e${Date.now().toString(36)}${++_id}`;
+
+// Speichern auf dem Gerät – ohne Konto, ohne Server. Schlägt das fehl (privates Fenster,
+// gesperrter Speicher), läuft die App einfach ohne Speichern weiter.
+const STORE = "babytakt-v1";
+const load = () => { try { const v = window.localStorage.getItem(STORE); return v ? JSON.parse(v) : null; } catch (e) { return null; } };
+const store = (v) => { try { window.localStorage.setItem(STORE, JSON.stringify(v)); return true; } catch (e) { return false; } };
+const wipe = () => { try { window.localStorage.removeItem(STORE); } catch (e) { /* egal */ } };
 
 // Eine realistische Woche Beispieldaten, passend zur aktuellen Uhrzeit
 function sampleData(now) {
@@ -238,15 +246,41 @@ export default function Babytakt() {
   const [scen, setScen] = useState(0);
   const [step, setStep] = useState(0);
   const [copied, setCopied] = useState(false);
+  const [ready, setReady] = useState(false);
+  const [persist, setPersist] = useState(true);
+  const [isSample, setIsSample] = useState(true);
+  const [confirm, setConfirm] = useState(null); // "leer" | "beispiel"
 
+  const fillSample = (t) => {
+    const d = sampleData(t);
+    setBaby("Mila"); setBirth(isoDate(t - 162 * DAY));
+    setSleeps(d.sleeps); setSleepStart(d.running); setFeeds(d.feeds); setDiapers(d.diapers); setFeedRun(null);
+    setIsSample(true);
+  };
   useEffect(() => {
     const f = new URLSearchParams(window.location.search).get("fuer");
     if (f) setName(f.slice(0, 30));
     const t = Date.now();
-    const d = sampleData(t);
-    setBirth(isoDate(t - 162 * DAY));
-    setSleeps(d.sleeps); setSleepStart(d.running); setFeeds(d.feeds); setDiapers(d.diapers); setNow(t);
+    const v = load();
+    if (v && Array.isArray(v.sleeps)) {
+      setBaby(v.baby ?? "Mila"); setBirth(v.birth || isoDate(t - 162 * DAY)); setBy(v.by || "papa");
+      setSleeps(v.sleeps); setSleepStart(v.sleepStart ?? null); setFeeds(v.feeds || []); setDiapers(v.diapers || []);
+      setFeedRun(v.feedRun ?? null); setFav(v.fav || {}); setDone(v.done || {}); setIsSample(!!v.isSample);
+    } else fillSample(t);
+    setNow(t); setReady(true);
   }, []);
+  // Jede Änderung sofort auf dem Gerät sichern
+  useEffect(() => {
+    if (!ready) return;
+    setPersist(store({ baby, birth, by, sleeps, sleepStart, feeds, diapers, feedRun, fav, done, isSample }));
+  }, [ready, baby, birth, by, sleeps, sleepStart, feeds, diapers, feedRun, fav, done, isSample]);
+  const resetTo = (kind) => {
+    wipe();
+    if (kind === "leer") {
+      setSleeps([]); setSleepStart(null); setFeeds([]); setDiapers([]); setFeedRun(null); setDone({}); setIsSample(false);
+    } else fillSample(Date.now());
+    setConfirm(null); setSaved(kind === "leer" ? "Alles gelöscht. Ihr startet mit einem leeren Babytakt." : "Beispielwoche geladen.");
+  };
   useEffect(() => {
     const iv = setInterval(() => setNow(Date.now()), sleepStart || feedRun ? 1000 : 20000);
     return () => clearInterval(iv);
@@ -730,6 +764,32 @@ export default function Babytakt() {
             </div>
             <p className="bt-hint small">So seht ihr in den Listen, wer was übernommen hat (P / M).</p>
 
+            <span className="bt-cap sp">Eure Daten</span>
+            <div className="bt-data">
+              <p>
+                {persist
+                  ? "Alle Einträge werden automatisch auf diesem Handy gespeichert – ohne Konto und ohne dass etwas übertragen wird."
+                  : "Speichern ist in diesem Browser gerade nicht möglich (z. B. im privaten Modus). Eure Einträge gehen beim Schließen verloren."}
+              </p>
+              {isSample && <p><b>Gerade seht ihr eine Beispielwoche.</b> Startet leer, um Babytakt mit eurem Baby zu nutzen.</p>}
+              {confirm ? (
+                <div className="bt-confirm">
+                  <span>{confirm === "leer" ? "Wirklich alle Einträge löschen?" : "Eure Einträge durch die Beispielwoche ersetzen?"}</span>
+                  <div className="bt-two">
+                    <button className="bt-ghost" onClick={() => setConfirm(null)}>Abbrechen</button>
+                    <button className="bt-act" onClick={() => resetTo(confirm)}>{confirm === "leer" ? "Ja, löschen" : "Ja, ersetzen"}</button>
+                  </div>
+                </div>
+              ) : (
+                <div className="bt-two">
+                  <button className="bt-act" onClick={() => setConfirm("leer")}>Leer starten</button>
+                  <button className="bt-ghost wide" onClick={() => setConfirm("beispiel")}>Beispielwoche</button>
+                </div>
+              )}
+              <p className="bt-hint small">Die Daten liegen nur auf diesem Gerät. Wer den Browserverlauf löscht, löscht auch sie. Im fertigen Produkt kommen Konto, Sicherung und gemeinsame Nutzung dazu.</p>
+            </div>
+            {saved && <p className="bt-saved" role="status">✓ {saved}</p>}
+
             <span className="bt-cap sp">Bericht für Hebamme & Kinderarzt</span>
             <pre className="bt-report">{report}</pre>
             <button className="bt-act" onClick={copyReport}>{copied ? "✓ Kopiert" : "Bericht kopieren"}</button>
@@ -926,6 +986,11 @@ export default function Babytakt() {
         .bt-help b{color:var(--ink)}
 
         .bt-form{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+        .bt-data{background:var(--s);border-radius:14px;padding:12px}
+        .bt-data p{font-size:13px;line-height:1.5;margin-bottom:10px}
+        .bt-data .bt-hint{margin:8px 0 0}
+        .bt .bt-ghost.wide{flex:1}
+        .bt-confirm span{display:block;font-weight:600;font-size:13.5px;margin-bottom:8px}
         .bt-report{white-space:pre-wrap;font:12.5px/1.5 var(--sans);background:var(--s);border-radius:14px;padding:12px;margin:0 0 10px;color:var(--ink)}
         .bt-roadmap{margin-top:18px;border:1px dashed var(--c);border-radius:14px;padding:12px 14px}
         .bt-roadmap strong{font-size:13.5px;color:var(--d)}

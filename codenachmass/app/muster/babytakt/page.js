@@ -27,6 +27,7 @@ export default function MusterBabytakt() {
             <ul className="checks">
               <li><strong>Schlaf:</strong> Schlaf per Knopfdruck festhalten, sehen, wann das nächste Müdigkeitsfenster kommt, und einen Tipp bekommen, der genau jetzt passt — dazu Wochenübersicht und Auswertung</li>
               <li><strong>Essen:</strong> Stillen mit Timer und Seitenwechsel, Fläschchen, Beikost mit „schon probiert“ und Windeln — mit Rhythmus und Durchschnittswerten</li>
+              <li><strong>To-dos:</strong> eine gemeinsame Liste für beide Eltern — wer macht was, was ist heute noch offen, was wiederholt sich täglich, und wer hat diese Woche was übernommen</li>
               <li><strong>Tipps:</strong> über 20 Tipps zu Schlaf, Essen und dem Papa-Alltag, passend zum Alter des Babys, zum Merken</li>
               <li><strong>SOS:</strong> Schritt für Schritt durch drei typische Situationen, von „schläft nicht ein“ bis „weint und ist kaum zu beruhigen“</li>
               <li><strong>Baby:</strong> Geburtsdatum einmal eintragen, alles passt sich an — plus Bericht für Hebamme und Kinderarzt per Knopfdruck</li>

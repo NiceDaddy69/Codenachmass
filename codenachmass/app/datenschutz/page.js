@@ -66,7 +66,7 @@ export default function Datenschutz() {
         </p>
         <p style={P}>
           Das Muster-Produkt „Babytakt“ (unter /muster/babytakt) speichert Ihre Eingaben, etwa
-          Schlaf- und Mahlzeiteneinträge, Name und Geburtsdatum des Babys, <strong>ausschließlich
+          Schlaf- und Mahlzeiteneinträge, To-dos, Name und Geburtsdatum des Babys, <strong>ausschließlich
           lokal im Speicher Ihres Browsers</strong> (localStorage), damit sie beim nächsten Öffnen
           noch da sind. Diese Daten werden <strong>nicht an mich oder Dritte übertragen</strong>.
           Sie können sie in der Anwendung unter „Baby“ jederzeit löschen oder über die Einstellungen

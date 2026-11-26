@@ -120,17 +120,22 @@ const tipByTitle = (t) => TIPS.find((x) => x.t === t);
 const FEED = { L: "Stillen links", R: "Stillen rechts", F: "Fläschchen", B: "Beikost" };
 const FOODS = ["Karotte", "Pastinake", "Kürbis", "Kartoffel", "Banane", "Apfel", "Hirse", "Haferbrei"];
 const DIAPER = { nass: "Windel nass", voll: "Windel voll", beides: "Windel nass + voll" };
+const WHO = { papa: "Papa", mama: "Mama", beide: "Beide" };
+const TODO_GROUPS = [["heute", "Heute & täglich"], ["woche", "Diese Woche"], ["irgendwann", "Später"]];
+const TODO_SUGGEST = [["Vitamin D geben", true], ["Fläschchen auskochen", true], ["Windeln nachkaufen", false], ["Pre-Milch kaufen", false], ["Kinderarzt-Termin vereinbaren", false], ["Wäsche waschen", false], ["Einkaufen", false], ["Zeit für dich einplanen", false]];
 
 const THEMES = {
   schlaf: { c: "#4655A8", d: "#283171", s: "#EEF0FA" },
   essen: { c: "#DE6249", d: "#A6402B", s: "#FDEFEB" },
   tipps: { c: "#1F8576", d: "#135C53", s: "#E6F4F1" },
   sos: { c: "#D97F26", d: "#9C5812", s: "#FCF1E3" },
+  todo: { c: "#C2416B", d: "#8C2A4C", s: "#FCEEF3" },
   baby: { c: "#9153AD", d: "#603479", s: "#F4ECF8" },
 };
 const NAV = [
   ["schlaf", "Schlaf", <path key="m" d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" />],
   ["essen", "Essen", <path key="b" d="M10 2h4M10.5 2v3L8.5 8v12a2 2 0 0 0 2 2h3a2 2 0 0 0 2-2V8l-2-3V2M8.5 12h7M8.5 16h7" />],
+  ["todo", "To-dos", <path key="d" d="M10 6h10M10 12h10M10 18h10M3.5 6l1.3 1.3L7.5 4.6M3.5 12l1.3 1.3 2.7-2.7M3.5 18l1.3 1.3 2.7-2.7" />],
   ["tipps", "Tipps", <path key="t" d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.6 10.8c.7.5 1.1 1.3 1.1 2.2h5c0-.9.4-1.7 1.1-2.2A6 6 0 0 0 12 3z" />],
   ["sos", "SOS", <g key="s"><circle cx="12" cy="12" r="9" /><circle cx="12" cy="12" r="3.5" /><path d="M5.6 5.6l3.9 3.9M14.5 14.5l3.9 3.9M18.4 5.6l-3.9 3.9M9.5 14.5l-3.9 3.9" /></g>],
   ["baby", "Baby", <path key="h" d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.3a4.3 4.3 0 0 1 7.5 2.5C19.5 15.4 12 20 12 20z" />],
@@ -211,6 +216,25 @@ function sampleData(now) {
   return { sleeps: keep, running, feeds: feeds.filter((f) => f.t + f.d <= now), diapers: diapers.filter((x) => x.t <= now) };
 }
 
+// Beispiel-To-dos für ein Elternpaar
+function sampleTodos(now) {
+  const T = (text, who, when, extra = {}) => ({ id: uid(), text, who, when, daily: false, done: null, ...extra });
+  const doneAt = (d, h, m, by) => { const t = at(now, d, h, m); return t <= now ? { by, t } : null; };
+  return [
+    T("Vitamin D geben", "beide", "heute", { daily: true, done: doneAt(0, 8, 10, "mama") }),
+    T("Fläschchen auskochen", "papa", "heute", { daily: true }),
+    T("Windeln nachkaufen (Größe 3)", "papa", "heute"),
+    T("Bodys und Schlafsäcke waschen", "papa", "heute", { done: doneAt(0, 9, 30, "papa") }),
+    T("U-Untersuchung beim Kinderarzt vereinbaren", "mama", "woche"),
+    T("Babysitter für Samstag fragen", "papa", "woche"),
+    T("Hebamme wegen Beikost fragen", "mama", "woche", { done: doneAt(-1, 15, 0, "mama") }),
+    T("Pre-Milch auf Vorrat kaufen", "beide", "irgendwann"),
+    T("Elterngeld-Unterlagen abschicken", "mama", "woche", { done: doneAt(-2, 11, 20, "mama") }),
+    T("Kinderwagenreifen aufpumpen", "papa", "woche", { done: doneAt(-3, 18, 5, "papa") }),
+    T("Babyschwimmen anmelden", "papa", "irgendwann", { done: doneAt(-4, 20, 40, "papa") }),
+  ];
+}
+
 // ---------------------------------------------------------------- App
 export default function Babytakt() {
   const [name, setName] = useState("[Dein Name]");
@@ -246,6 +270,12 @@ export default function Babytakt() {
   const [scen, setScen] = useState(0);
   const [step, setStep] = useState(0);
   const [copied, setCopied] = useState(false);
+  const [todos, setTodos] = useState([]);
+  const [todoText, setTodoText] = useState("");
+  const [todoWho, setTodoWho] = useState("beide");
+  const [todoWhen, setTodoWhen] = useState("heute");
+  const [todoDaily, setTodoDaily] = useState(false);
+  const [todoFilter, setTodoFilter] = useState("alle");
   const [ready, setReady] = useState(false);
   const [persist, setPersist] = useState(true);
   const [isSample, setIsSample] = useState(true);
@@ -255,6 +285,7 @@ export default function Babytakt() {
     const d = sampleData(t);
     setBaby("Mila"); setBirth(isoDate(t - 162 * DAY));
     setSleeps(d.sleeps); setSleepStart(d.running); setFeeds(d.feeds); setDiapers(d.diapers); setFeedRun(null);
+    setTodos(sampleTodos(t));
     setIsSample(true);
   };
   useEffect(() => {
@@ -266,18 +297,19 @@ export default function Babytakt() {
       setBaby(v.baby ?? "Mila"); setBirth(v.birth || isoDate(t - 162 * DAY)); setBy(v.by || "papa");
       setSleeps(v.sleeps); setSleepStart(v.sleepStart ?? null); setFeeds(v.feeds || []); setDiapers(v.diapers || []);
       setFeedRun(v.feedRun ?? null); setFav(v.fav || {}); setDone(v.done || {}); setIsSample(!!v.isSample);
+      setTodos(Array.isArray(v.todos) ? v.todos : sampleTodos(t));
     } else fillSample(t);
     setNow(t); setReady(true);
   }, []);
   // Jede Änderung sofort auf dem Gerät sichern
   useEffect(() => {
     if (!ready) return;
-    setPersist(store({ baby, birth, by, sleeps, sleepStart, feeds, diapers, feedRun, fav, done, isSample }));
-  }, [ready, baby, birth, by, sleeps, sleepStart, feeds, diapers, feedRun, fav, done, isSample]);
+    setPersist(store({ baby, birth, by, sleeps, sleepStart, feeds, diapers, feedRun, fav, done, isSample, todos }));
+  }, [ready, baby, birth, by, sleeps, sleepStart, feeds, diapers, feedRun, fav, done, isSample, todos]);
   const resetTo = (kind) => {
     wipe();
     if (kind === "leer") {
-      setSleeps([]); setSleepStart(null); setFeeds([]); setDiapers([]); setFeedRun(null); setDone({}); setIsSample(false);
+      setSleeps([]); setSleepStart(null); setFeeds([]); setDiapers([]); setFeedRun(null); setDone({}); setTodos([]); setIsSample(false);
     } else fillSample(Date.now());
     setConfirm(null); setSaved(kind === "leer" ? "Alles gelöscht. Ihr startet mit einem leeren Babytakt." : "Beispielwoche geladen.");
   };
@@ -426,6 +458,24 @@ export default function Babytakt() {
   const favCount = TIPS.filter((x) => fav[x.t]).length;
   const tips = TIPS.filter((x) => x.a.includes(tAge) && (cat === "alle" || (cat === "fav" ? fav[x.t] : x.c === cat)));
   const toggleFav = (t) => setFav((f) => ({ ...f, [t]: !f[t] }));
+
+  // ---------- To-dos
+  const t0 = now ? at(now, 0, 0, 0) : 0;
+  const isDone = (x) => !!x.done && (!x.daily || x.done.t >= t0);
+  const mine = (x) => x.who === by || x.who === "beide";
+  const openTodos = todos.filter((x) => !isDone(x) && (todoFilter !== "meine" || mine(x)));
+  const openToday = todos.filter((x) => !isDone(x) && (x.daily || x.when === "heute"));
+  const doneTodos = now ? todos.filter((x) => x.done && x.done.t >= now - 7 * DAY).sort((a, b) => b.done.t - a.done.t) : [];
+  const weekDone = { papa: doneTodos.filter((x) => x.done.by === "papa").length, mama: doneTodos.filter((x) => x.done.by === "mama").length };
+  const suggestions = TODO_SUGGEST.filter(([t]) => !todos.some((x) => (x.daily || !isDone(x)) && x.text.toLowerCase().startsWith(t.toLowerCase()))).slice(0, 4);
+  const addTodo = (text, daily = todoDaily) => {
+    const tx = text.trim();
+    if (!tx) return;
+    setTodos((s) => [{ id: uid(), text: tx, who: todoWho, when: daily ? "heute" : todoWhen, daily, done: null }, ...s]);
+    setTodoText(""); setTodoDaily(false); setSaved(`„${tx}“ hinzugefügt – für ${WHO[todoWho]}.`);
+  };
+  const toggleTodo = (id) => setTodos((s) => s.map((x) => (x.id !== id ? x : isDone(x) ? { ...x, done: null } : { ...x, done: { by, t: Date.now() } })));
+  const cycleWho = (id) => setTodos((s) => s.map((x) => (x.id !== id ? x : { ...x, who: x.who === "papa" ? "mama" : x.who === "mama" ? "beide" : "papa" })));
 
   // ---------- Bericht
   const report = now ? [
@@ -682,6 +732,100 @@ export default function Babytakt() {
           </>
         )}
 
+        {/* ======================= TO-DOS ======================= */}
+        {now && tab === "todo" && (
+          <>
+            <div className="bt-card">
+              <span className="bt-lbl">Heute noch offen</span>
+              <strong className="bt-big">{openToday.length}</strong>
+              <span className="bt-sub">
+                {openToday.length === 0 ? "Alles erledigt – stark, ihr zwei!" : `Papa ${openToday.filter((x) => x.who === "papa").length} · Mama ${openToday.filter((x) => x.who === "mama").length} · Beide ${openToday.filter((x) => x.who === "beide").length}`}
+              </span>
+            </div>
+
+            <div className="bt-iam">
+              <span>Du bist</span>
+              <div className="bt-chips">
+                {[["papa", "Papa"], ["mama", "Mama"]].map(([k, l]) => <button key={k} className={by === k ? "on" : ""} onClick={() => setBy(k)}>{l}</button>)}
+              </div>
+            </div>
+
+            <div className="bt-newtodo">
+              <div className="bt-inrow">
+                <input value={todoText} maxLength={60} placeholder="Neues To-do, z. B. Windeln kaufen" onChange={(e) => setTodoText(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter") addTodo(todoText); }} aria-label="Neues To-do" />
+                <button className="bt-act" disabled={!todoText.trim()} onClick={() => addTodo(todoText)} aria-label="To-do hinzufügen">+</button>
+              </div>
+              <div className="bt-opts">
+                <div className="bt-optgroup" aria-label="Für wen">
+                  {[["papa", "Papa"], ["mama", "Mama"], ["beide", "Beide"]].map(([k, l]) => <button key={k} className={todoWho === k ? "on" : ""} onClick={() => setTodoWho(k)}>{l}</button>)}
+                </div>
+                <div className="bt-optgroup" aria-label="Wann">
+                  {[["heute", "Heute"], ["woche", "Woche"], ["irgendwann", "Später"]].map(([k, l]) => <button key={k} className={todoWhen === k ? "on" : ""} onClick={() => setTodoWhen(k)}>{l}</button>)}
+                </div>
+              </div>
+              <label className="bt-daily"><input type="checkbox" checked={todoDaily} onChange={() => setTodoDaily((d) => !d)} /> Jeden Tag wiederholen</label>
+              {suggestions.length > 0 && (
+                <div className="bt-sugg">
+                  {suggestions.map(([t, daily]) => <button key={t} onClick={() => addTodo(t, daily)}>+ {t}</button>)}
+                </div>
+              )}
+            </div>
+
+            {saved && <p className="bt-saved" role="status">✓ {saved}</p>}
+            <div className="bt-seg">
+              {[["alle", "Alle offenen"], ["meine", "Für mich"], ["erledigt", "Erledigt"]].map(([k, l]) => (
+                <button key={k} className={todoFilter === k ? "on" : ""} onClick={() => setTodoFilter(k)}>{l}</button>
+              ))}
+            </div>
+
+            {todoFilter !== "erledigt" && TODO_GROUPS.map(([g, label]) => {
+              const items = openTodos.filter((x) => (g === "heute" ? x.daily || x.when === "heute" : !x.daily && x.when === g));
+              if (!items.length) return null;
+              return (
+                <div key={g}>
+                  <span className="bt-cap sp">{label}</span>
+                  {items.map((x) => (
+                    <div className="bt-todo" key={x.id}>
+                      <input type="checkbox" checked={false} onChange={() => toggleTodo(x.id)} aria-label={`${x.text} erledigen`} />
+                      <span className="bt-tdtxt">{x.text}{x.daily && <em>täglich</em>}</span>
+                      <button className={`bt-whobtn ${x.who}`} onClick={() => cycleWho(x.id)} title="Zuständig ändern">{WHO[x.who]}</button>
+                      <button className="bt-del" onClick={() => setTodos((s) => s.filter((i) => i.id !== x.id))} aria-label="To-do löschen">×</button>
+                    </div>
+                  ))}
+                </div>
+              );
+            })}
+            {todoFilter !== "erledigt" && openTodos.length === 0 && <p className="bt-hint">{todoFilter === "meine" ? "Für dich ist gerade nichts offen." : "Nichts offen. Genießt die Pause!"}</p>}
+
+            {(todoFilter === "erledigt" ? doneTodos : doneTodos.filter((x) => x.done.t >= at(now, 0, 0, 0))).length > 0 && (
+              <span className="bt-cap sp">{todoFilter === "erledigt" ? "Erledigt in den letzten 7 Tagen" : "Heute erledigt"}</span>
+            )}
+            {(todoFilter === "erledigt" ? doneTodos : doneTodos.filter((x) => x.done.t >= at(now, 0, 0, 0))).map((x) => (
+              <div className="bt-todo done" key={x.id}>
+                <input type="checkbox" checked onChange={() => toggleTodo(x.id)} aria-label={`${x.text} wieder öffnen`} />
+                <span className="bt-tdtxt"><span className="bt-tdt">{x.text}</span><em>von {x.done.by === "papa" ? "Papa" : "Mama"} · {x.done.t >= at(now, 0, 0, 0) ? `${clock(x.done.t)} Uhr` : dateDE(x.done.t)}</em></span>
+                <Badge who={x.done.by} />
+              </div>
+            ))}
+            {todoFilter === "erledigt" && doneTodos.length === 0 && <p className="bt-hint">Noch nichts erledigt.</p>}
+
+            <span className="bt-cap sp">Wer hat diese Woche was übernommen?</span>
+            <div className="bt-split">
+              <div className="papa" style={{ flex: Math.max(weekDone.papa, 0.3) }}>Papa {weekDone.papa}</div>
+              <div className="mama" style={{ flex: Math.max(weekDone.mama, 0.3) }}>Mama {weekDone.mama}</div>
+            </div>
+            <p className="bt-hint small">Kein Wettbewerb – nur ein ehrlicher Blick, damit sich niemand allein fühlt.</p>
+
+            <div className="bt-roadmap">
+              <strong>Im fertigen Produkt</strong>
+              <ul>
+                <li>Neue To-dos und Häkchen erscheinen sofort auch auf dem Handy deines Partners</li>
+                <li>Auf Wunsch eine Erinnerung, wenn ein To-do für heute noch offen ist</li>
+              </ul>
+            </div>
+          </>
+        )}
+
         {/* ======================= TIPPS ======================= */}
         {tab === "tipps" && (
           <>
@@ -798,7 +942,7 @@ export default function Babytakt() {
             <div className="bt-roadmap">
               <strong>Im fertigen Produkt dazu möglich</strong>
               <ul>
-                <li>Gemeinsam nutzen: beide Eltern sehen dieselben Daten</li>
+                <li>Gemeinsam nutzen: beide Eltern sehen dieselben Daten und To-dos</li>
                 <li>Erinnerungen, z. B. an Vitamin D oder die nächste U-Untersuchung</li>
                 <li>Kurze Videos von {name === "[Dein Name]" ? "dir" : name} zu einzelnen Tipps</li>
                 <li>Weitere Themen wie Zahnen oder Kita-Eingewöhnung</li>
@@ -996,8 +1140,36 @@ export default function Babytakt() {
         .bt-roadmap strong{font-size:13.5px;color:var(--d)}
         .bt-roadmap ul{margin:6px 0 0;padding-left:18px;font-size:13px;line-height:1.55}
 
+        .bt-iam{display:flex;align-items:center;gap:10px;margin-top:12px}
+        .bt-iam>span{font-size:12.5px;color:var(--muted);flex-shrink:0}
+        .bt-iam .bt-chips{flex:1;margin:0}
+        .bt-newtodo{margin-top:12px;background:var(--s);border-radius:16px;padding:12px}
+        .bt-inrow{display:flex;gap:8px}
+        .bt-inrow input{flex:1;min-width:0;font:500 14.5px var(--sans);color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:11px 12px;background:#fff}
+        .bt .bt-inrow .bt-act{width:46px;flex:0 0 46px;font-size:22px;padding:0;line-height:1}
+        .bt-opts{display:flex;gap:8px;margin-top:8px}
+        .bt-optgroup{flex:1;display:flex;background:#fff;border:1px solid var(--line);border-radius:10px;padding:2px}
+        .bt .bt-optgroup button{flex:1;border:0;background:none;border-radius:8px;font-weight:600;font-size:11.5px;padding:6px 0;cursor:pointer;color:var(--muted)}
+        .bt .bt-optgroup button.on{background:var(--c);color:#fff}
+        .bt-daily{display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--muted);margin-top:8px;cursor:pointer}
+        .bt-daily input{accent-color:var(--c);margin:0}
+        .bt-sugg{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;padding-top:10px;border-top:1px solid #fff}
+        .bt .bt-sugg button{border:1px dashed var(--c);background:#fff;border-radius:999px;font-weight:600;font-size:12px;color:var(--d);padding:6px 10px;cursor:pointer}
+        .bt-todo{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--lineSoft)}
+        .bt-todo input{width:20px;height:20px;accent-color:var(--c);margin:0;flex-shrink:0;cursor:pointer}
+        .bt-tdtxt{flex:1;min-width:0;font-size:14.5px;line-height:1.3}
+        .bt-tdtxt em{display:block;font-style:normal;font-size:11.5px;color:var(--muted)}
+        .bt-todo.done .bt-tdt{color:var(--muted);text-decoration:line-through}
+        .bt .bt-whobtn{flex-shrink:0;border:0;border-radius:999px;font-weight:700;font-size:11px;padding:4px 9px;cursor:pointer;color:#fff}
+        .bt .bt-whobtn.papa{background:#3B6FB6}
+        .bt .bt-whobtn.mama{background:#C2547A}
+        .bt .bt-whobtn.beide{background:linear-gradient(90deg,#3B6FB6,#C2547A)}
+        .bt-split{display:flex;gap:4px;border-radius:12px;overflow:hidden}
+        .bt-split div{padding:9px 10px;font-size:12.5px;font-weight:700;color:#fff;white-space:nowrap;min-width:max-content}
+        .bt-split .papa{background:#3B6FB6}
+        .bt-split .mama{background:#C2547A;text-align:right}
         .bt-nav{display:flex;border-top:1px solid var(--line);background:#fff;padding:6px 4px 8px}
-        .bt .bt-nav button{flex:1;background:none;border:0;display:flex;flex-direction:column;align-items:center;gap:2px;padding:4px 0;cursor:pointer;color:#9AA0AE;font-size:11px;font-weight:600}
+        .bt .bt-nav button{flex:1;min-width:0;background:none;border:0;display:flex;flex-direction:column;align-items:center;gap:2px;padding:4px 0;cursor:pointer;color:#9AA0AE;font-size:10.5px;font-weight:600;white-space:nowrap}
         .bt .bt-nav button.on{color:var(--ic)}
         .bt-nav button svg{transition:transform .15s}
         .bt-nav button.on svg{transform:translateY(-1px)}

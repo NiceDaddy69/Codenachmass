@@ -5,7 +5,8 @@ import BabytaktLogo from "../../components/BabytaktLogo";
 
 const WA = `https://wa.me/4917663250203?text=${encodeURIComponent("Hi Lukas, ich habe mir das Muster von Babytakt angesehen. ")}`;
 
-export default function MusterBabytakt() {
+export default function MusterBabytakt({ searchParams }) {
+  const fuer = typeof searchParams?.fuer === "string" ? searchParams.fuer : null;
   const [appUrl, setAppUrl] = useState("/babytakt");
   useEffect(() => { setAppUrl(`/babytakt${window.location.search}`); }, []);
   return (
@@ -59,7 +60,7 @@ export default function MusterBabytakt() {
             <a href={WA} target="_blank" rel="noopener noreferrer" className="btn">Schreib mir, was du davon hältst</a>
             <p className="note">Muster zur Veranschaulichung mit Orientierungs- und Beispielwerten. Kein medizinischer Rat. Deine Eingaben werden nur auf deinem Gerät gespeichert und nicht übertragen. Unter „Baby“ kannst du leer starten oder die Beispielwoche wieder laden.</p>
           </div>
-          <Babytakt />
+          <Babytakt initialName={fuer} />
         </div>
       </section>
 

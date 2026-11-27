@@ -237,7 +237,7 @@ function sampleTodos(now) {
 }
 
 // ---------------------------------------------------------------- App
-export default function Babytakt() {
+export default function Babytakt({ fullscreen = false }) {
   const [name, setName] = useState("[Dein Name]");
   const [tab, setTab] = useState("schlaf");
   const [now, setNow] = useState(null);
@@ -291,7 +291,11 @@ export default function Babytakt() {
   };
   useEffect(() => {
     const f = new URLSearchParams(window.location.search).get("fuer");
-    if (f) setName(f.slice(0, 30));
+    try {
+      if (f) window.localStorage.setItem("babytakt-fuer", f.slice(0, 30));
+      const keep = f || window.localStorage.getItem("babytakt-fuer");
+      if (keep) setName(keep.slice(0, 30));
+    } catch (e) { if (f) setName(f.slice(0, 30)); }
     const t = Date.now();
     const v = load();
     if (v && Array.isArray(v.sleeps)) {
@@ -494,12 +498,12 @@ export default function Babytakt() {
   const Badge = ({ who }) => (who ? <span className={`bt-who ${who}`} title={who === "papa" ? "Papa" : "Mama"}>{who === "papa" ? "P" : "M"}</span> : null);
 
   return (
-    <div className="bt" style={{ "--c": T.c, "--d": T.d, "--s": T.s }}>
+    <div className={"bt" + (fullscreen ? " full" : "")} style={{ "--c": T.c, "--d": T.d, "--s": T.s }}>
       <div className="bt-top">
         <div className="bt-brand">
           <span className="bt-mark"><BabytaktLogo size={34} /></span>
           <span className="bt-logo">Babytakt</span>
-          <span className="bt-by">mit {name}</span>
+          <span className="bt-by">{name === "[Dein Name]" && fullscreen ? "Schlaf · Essen · To-dos" : `mit ${name}`}</span>
         </div>
         {now && <button className="bt-chip" onClick={() => go("baby")}>{babyName} · {ageText}</button>}
       </div>
@@ -950,6 +954,10 @@ export default function Babytakt() {
                 <li>Weitere Themen wie Zahnen oder Kita-Eingewöhnung</li>
               </ul>
             </div>
+            <p className="bt-legal">
+              Muster von <a href="/muster/babytakt">Code nach Maß</a> · Orientierungswerte, kein medizinischer Rat ·{" "}
+              <a href="/impressum">Impressum</a> · <a href="/datenschutz">Datenschutz</a>
+            </p>
           </>
         )}
       </div>
@@ -1172,6 +1180,18 @@ export default function Babytakt() {
         .bt-split .papa{background:#3B6FB6}
         .bt-split .mama{background:#C2547A;text-align:right}
         .bt-nav{display:flex;border-top:1px solid var(--line);background:#fff;padding:6px 4px 8px}
+        .bt-legal{margin-top:18px;font-size:11px;line-height:1.5;color:var(--muted);text-align:center}
+        .bt-legal a{color:var(--muted);text-decoration:underline;text-underline-offset:2px}
+
+        /* Eigenständige App-Ansicht (/babytakt): füllt den Bildschirm wie eine echte App */
+        .bt.full{max-width:none;height:100vh;height:100dvh;border:0;border-radius:0;box-shadow:none}
+        .bt.full .bt-top{padding-top:calc(14px + env(safe-area-inset-top));padding-left:calc(16px + env(safe-area-inset-left));padding-right:calc(16px + env(safe-area-inset-right))}
+        .bt.full .bt-body{flex:1;height:auto;min-height:0;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+        .bt.full .bt-nav{padding-bottom:calc(8px + env(safe-area-inset-bottom))}
+        .bt.full input,.bt.full select{font-size:16px}
+        @media (min-width:600px){
+          .bt.full{max-width:430px;height:calc(100dvh - 48px);margin:24px auto;border-radius:28px;box-shadow:0 24px 60px rgba(42,29,23,.18);border:1px solid var(--line)}
+        }
         .bt .bt-nav button{flex:1;min-width:0;background:none;border:0;display:flex;flex-direction:column;align-items:center;gap:2px;padding:4px 0;cursor:pointer;color:#9AA0AE;font-size:10.5px;font-weight:600;white-space:nowrap}
         .bt .bt-nav button.on{color:var(--ic)}
         .bt-nav button svg{transition:transform .15s}

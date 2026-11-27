@@ -1,10 +1,13 @@
 "use client";
+import { useEffect, useState } from "react";
 import Babytakt from "../../components/Babytakt";
 import BabytaktLogo from "../../components/BabytaktLogo";
 
 const WA = `https://wa.me/4917663250203?text=${encodeURIComponent("Hi Lukas, ich habe mir das Muster von Babytakt angesehen. ")}`;
 
 export default function MusterBabytakt() {
+  const [appUrl, setAppUrl] = useState("/babytakt");
+  useEffect(() => { setAppUrl(`/babytakt${window.location.search}`); }, []);
   return (
     <main>
       <header className="nav">
@@ -48,6 +51,11 @@ export default function MusterBabytakt() {
                 Nutzung für beide Eltern, Erinnerungen und kurze Videos von dir.
               </p>
             </div>
+            <div className="appbox">
+              <strong>Auf dem Handy wie eine echte App nutzen</strong>
+              <p>Öffne Babytakt ohne diese Seite drumherum und leg es über „Zum Home-Bildschirm“ auf deinen Startbildschirm.</p>
+              <a href={appUrl} className="btn appbtn">Babytakt als App öffnen →</a>
+            </div>
             <a href={WA} target="_blank" rel="noopener noreferrer" className="btn">Schreib mir, was du davon hältst</a>
             <p className="note">Muster zur Veranschaulichung mit Orientierungs- und Beispielwerten. Kein medizinischer Rat. Deine Eingaben werden nur auf deinem Gerät gespeichert und nicht übertragen. Unter „Baby“ kannst du leer starten oder die Beispielwoche wieder laden.</p>
           </div>
@@ -83,6 +91,11 @@ export default function MusterBabytakt() {
         .next p{margin-top:8px;color:var(--muted);font-size:15px}
         .btn{display:inline-flex;margin-top:24px;background:var(--wa);color:#06321A;font-weight:600;font-size:15.5px;padding:14px 22px;border-radius:999px;box-shadow:0 10px 24px rgba(37,211,102,.28)}
         .btn:hover{background:#3BE07A}
+        .appbox{margin-top:22px;max-width:600px;background:linear-gradient(140deg,#4655A8,#283171);color:#fff;border-radius:20px;padding:18px 20px}
+        .appbox strong{font-family:var(--disp);font-size:18px}
+        .appbox p{margin-top:6px;font-size:14.5px;color:#D9DDF3}
+        .appbox .appbtn{margin-top:14px;background:#fff;color:#283171;box-shadow:none}
+        .appbox .appbtn:hover{background:#EEF0FA}
         .note{margin-top:16px;font-size:12.5px;color:var(--muted);max-width:600px}
         .foot{border-top:1px solid var(--line);padding:22px 0;font-size:13.5px;color:var(--muted)}
         .footIn{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}

@@ -237,8 +237,11 @@ function sampleTodos(now) {
 }
 
 // ---------------------------------------------------------------- App
-export default function Babytakt({ fullscreen = false }) {
-  const [name, setName] = useState("[Dein Name]");
+export default function Babytakt({ fullscreen = false, initialName = null }) {
+  // Kanalname: kommt schon vom Server aus ?fuer=, damit er ab dem ersten Bild dasteht.
+  // In der App-Ansicht ohne Namen bleibt die Zeile leer, im Muster steht der Platzhalter.
+  const [name, setName] = useState(initialName ? initialName.slice(0, 30) : fullscreen ? null : "[Dein Name]");
+  const byText = name ? `mit ${name}` : "";
   const [tab, setTab] = useState("schlaf");
   const [now, setNow] = useState(null);
   // Profil
@@ -513,7 +516,7 @@ export default function Babytakt({ fullscreen = false }) {
             <span className="bt-splash-ring" aria-hidden="true" />
             <span className="bt-splash-logo"><BabytaktLogo size={104} /></span>
             <strong className="bt-splash-name">Babytakt</strong>
-            <span className="bt-splash-by">{name === "[Dein Name]" ? "Schlaf · Essen · To-dos" : `mit ${name}`}</span>
+            <span className={"bt-splash-by" + (byText ? "" : " none")}>{byText || "\u00a0"}</span>
           </div>
         </div>
       )}
@@ -521,7 +524,7 @@ export default function Babytakt({ fullscreen = false }) {
         <div className="bt-brand">
           <span className="bt-mark"><BabytaktLogo size={34} /></span>
           <span className="bt-logo">Babytakt</span>
-          <span className="bt-by">{name === "[Dein Name]" && fullscreen ? "Schlaf · Essen · To-dos" : `mit ${name}`}</span>
+          <span className="bt-by">{byText || "\u00a0"}</span>
         </div>
         {now && <button className="bt-chip" onClick={() => go("baby")}>{babyName} · {ageText}</button>}
       </div>
@@ -968,7 +971,7 @@ export default function Babytakt({ fullscreen = false }) {
               <ul>
                 <li>Gemeinsam nutzen: beide Eltern sehen dieselben Daten und To-dos</li>
                 <li>Erinnerungen, z. B. an Vitamin D oder die nächste U-Untersuchung</li>
-                <li>Kurze Videos von {name === "[Dein Name]" ? "dir" : name} zu einzelnen Tipps</li>
+                <li>Kurze Videos von {name && name !== "[Dein Name]" ? name : "dir"} zu einzelnen Tipps</li>
                 <li>Weitere Themen wie Zahnen oder Kita-Eingewöhnung</li>
               </ul>
             </div>
@@ -1206,7 +1209,8 @@ export default function Babytakt({ fullscreen = false }) {
         .bt-splash-logo{border-radius:26px;box-shadow:0 18px 40px rgba(30,20,60,.35),0 0 0 3px rgba(255,255,255,.5);animation:bt-pop .7s cubic-bezier(.2,1.4,.4,1) both,bt-beat .5s ease-in-out .85s 1}
         .bt-splash-ring{position:absolute;top:52px;left:50%;width:104px;height:104px;margin:-52px 0 0 -52px;border-radius:30px;border:2px solid rgba(255,255,255,.7);animation:bt-ring 1.1s ease-out .55s both}
         .bt-splash-name{margin-top:22px;font-family:var(--disp);font-size:36px;font-weight:700;letter-spacing:-0.02em;line-height:1.1;animation:bt-up .55s ease-out .3s both}
-        .bt-splash-by{margin-top:6px;font-size:16px;font-weight:600;opacity:.9;animation:bt-up .55s ease-out .5s both}
+        .bt-splash-by{margin-top:12px;min-height:34px;padding:6px 16px;border-radius:999px;background:rgba(255,255,255,.2);font-size:17px;font-weight:700;letter-spacing:.01em;animation:bt-up .55s ease-out .5s both}
+        .bt-splash-by:empty,.bt-splash-by.none{background:none}
         @keyframes bt-sky{from{background-position:0% 0%}to{background-position:100% 100%}}
         @keyframes bt-pop{0%{opacity:0;transform:scale(.5) rotate(-12deg)}100%{opacity:1;transform:none}}
         @keyframes bt-beat{0%,100%{transform:scale(1)}35%{transform:scale(1.08)}65%{transform:scale(.98)}}

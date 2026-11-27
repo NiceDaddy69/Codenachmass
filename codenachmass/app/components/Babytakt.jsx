@@ -281,6 +281,8 @@ export default function Babytakt({ fullscreen = false }) {
   const [persist, setPersist] = useState(true);
   const [isSample, setIsSample] = useState(true);
   const [confirm, setConfirm] = useState(null); // "leer" | "beispiel"
+  // Start-Animation nur in der App-Ansicht: "on" → "out" (ausblenden) → "off"
+  const [splash, setSplash] = useState(fullscreen ? "on" : "off");
 
   const fillSample = (t) => {
     const d = sampleData(t);
@@ -305,6 +307,12 @@ export default function Babytakt({ fullscreen = false }) {
       setTodos(Array.isArray(v.todos) ? v.todos : sampleTodos(t));
     } else fillSample(t);
     setNow(t); setReady(true);
+    if (fullscreen) {
+      const calm = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const t1 = setTimeout(() => setSplash((x) => (x === "on" ? "out" : x)), calm ? 700 : 1500);
+      const t2 = setTimeout(() => setSplash("off"), calm ? 1000 : 1950);
+      return () => { clearTimeout(t1); clearTimeout(t2); };
+    }
   }, []);
   // Jede Änderung sofort auf dem Gerät sichern
   useEffect(() => {
@@ -499,6 +507,16 @@ export default function Babytakt({ fullscreen = false }) {
 
   return (
     <div className={"bt" + (fullscreen ? " full" : "")} style={{ "--c": T.c, "--d": T.d, "--s": T.s }}>
+      {splash !== "off" && (
+        <div className={"bt-splash" + (splash === "out" ? " out" : "")} onClick={() => setSplash("out")} role="presentation">
+          <div className="bt-splash-in">
+            <span className="bt-splash-ring" aria-hidden="true" />
+            <span className="bt-splash-logo"><BabytaktLogo size={104} /></span>
+            <strong className="bt-splash-name">Babytakt</strong>
+            <span className="bt-splash-by">{name === "[Dein Name]" ? "Schlaf · Essen · To-dos" : `mit ${name}`}</span>
+          </div>
+        </div>
+      )}
       <div className="bt-top">
         <div className="bt-brand">
           <span className="bt-mark"><BabytaktLogo size={34} /></span>
@@ -1180,6 +1198,21 @@ export default function Babytakt({ fullscreen = false }) {
         .bt-split .papa{background:#3B6FB6}
         .bt-split .mama{background:#C2547A;text-align:right}
         .bt-nav{display:flex;border-top:1px solid var(--line);background:#fff;padding:6px 4px 8px}
+        .bt-splash{position:fixed;inset:0;z-index:100;display:grid;place-items:center;color:#fff;cursor:pointer;
+          background:linear-gradient(150deg,#FF9A62 0%,#D2477A 48%,#3F4BA6 100%);background-size:160% 160%;
+          animation:bt-sky 1.9s ease-out both;transition:opacity .45s ease}
+        .bt-splash.out{opacity:0;pointer-events:none}
+        .bt-splash-in{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;padding-bottom:6vh}
+        .bt-splash-logo{border-radius:26px;box-shadow:0 18px 40px rgba(30,20,60,.35),0 0 0 3px rgba(255,255,255,.5);animation:bt-pop .7s cubic-bezier(.2,1.4,.4,1) both,bt-beat .5s ease-in-out .85s 1}
+        .bt-splash-ring{position:absolute;top:52px;left:50%;width:104px;height:104px;margin:-52px 0 0 -52px;border-radius:30px;border:2px solid rgba(255,255,255,.7);animation:bt-ring 1.1s ease-out .55s both}
+        .bt-splash-name{margin-top:22px;font-family:var(--disp);font-size:36px;font-weight:700;letter-spacing:-0.02em;line-height:1.1;animation:bt-up .55s ease-out .3s both}
+        .bt-splash-by{margin-top:6px;font-size:16px;font-weight:600;opacity:.9;animation:bt-up .55s ease-out .5s both}
+        @keyframes bt-sky{from{background-position:0% 0%}to{background-position:100% 100%}}
+        @keyframes bt-pop{0%{opacity:0;transform:scale(.5) rotate(-12deg)}100%{opacity:1;transform:none}}
+        @keyframes bt-beat{0%,100%{transform:scale(1)}35%{transform:scale(1.08)}65%{transform:scale(.98)}}
+        @keyframes bt-ring{0%{opacity:0;transform:scale(1)}20%{opacity:.8}100%{opacity:0;transform:scale(1.9)}}
+        @keyframes bt-up{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+        @media (prefers-reduced-motion:reduce){.bt-splash,.bt-splash *{animation:none!important}}
         .bt-legal{margin-top:18px;font-size:11px;line-height:1.5;color:var(--muted);text-align:center}
         .bt-legal a{color:var(--muted);text-decoration:underline;text-underline-offset:2px}
 

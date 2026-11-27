@@ -1,3 +1,4 @@
+"use client";
 import Babytakt from "../components/Babytakt";
 
 // Babytakt als eigenständige App – ohne Einleitung, bildschirmfüllend.

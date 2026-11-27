@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import BabytaktLogo from "./BabytaktLogo";
 
 /* Muster-Produkt „Babytakt“: Schlaf- und Ess-Tracker mit passenden Tipps, Soforthilfe und Bericht
    für Eltern im ersten Jahr. Läuft komplett im Browser: Einträge werden nur auf diesem Gerät gespeichert
@@ -496,6 +497,7 @@ export default function Babytakt() {
     <div className="bt" style={{ "--c": T.c, "--d": T.d, "--s": T.s }}>
       <div className="bt-top">
         <div className="bt-brand">
+          <span className="bt-mark"><BabytaktLogo size={34} /></span>
           <span className="bt-logo">Babytakt</span>
           <span className="bt-by">mit {name}</span>
         </div>
@@ -965,7 +967,8 @@ export default function Babytakt() {
         .bt{width:100%;max-width:380px;margin:0 auto;background:#fff;border:8px solid var(--ink);border-radius:36px;overflow:hidden;box-shadow:0 30px 60px rgba(42,29,23,.22);font-family:var(--sans);color:var(--ink);display:flex;flex-direction:column}
         .bt button{font-family:var(--sans);color:var(--ink)}
         .bt-top{background:linear-gradient(140deg,var(--c),var(--d));color:#fff;padding:18px 16px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px;transition:background .3s}
-        .bt-brand{min-width:0}
+        .bt-brand{min-width:0;display:grid;grid-template-columns:auto 1fr;column-gap:10px;align-items:center}
+        .bt-mark{grid-row:1/3;border-radius:10px;box-shadow:0 0 0 2px rgba(255,255,255,.35)}
         .bt-logo{display:block;font-family:var(--disp);font-size:22px;font-weight:700;letter-spacing:-0.02em;line-height:1.1}
         .bt-by{display:block;font-size:12.5px;opacity:.85;overflow-wrap:anywhere}
         .bt .bt-chip{flex-shrink:0;border:0;background:rgba(255,255,255,.2);color:#fff;border-radius:999px;font-weight:600;font-size:12px;padding:7px 11px;cursor:pointer;max-width:55%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}

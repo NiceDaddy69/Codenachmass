@@ -1,0 +1,14 @@
+{
+  "name": "Babytakt",
+  "short_name": "Babytakt",
+  "description": "Schlaf, Essen und To-dos für Eltern im ersten Jahr – Muster von Code nach Maß.",
+  "start_url": "/muster/babytakt",
+  "scope": "/muster/",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#4655A8",
+  "icons": [
+    { "src": "/babytakt-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/babytakt-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

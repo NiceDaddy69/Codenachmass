@@ -1,5 +1,6 @@
 "use client";
 import Babytakt from "../../components/Babytakt";
+import BabytaktLogo from "../../components/BabytaktLogo";
 
 const WA = `https://wa.me/4917663250203?text=${encodeURIComponent("Hi Lukas, ich habe mir das Muster von Babytakt angesehen. ")}`;
 
@@ -16,8 +17,14 @@ export default function MusterBabytakt() {
       <section className="sec">
         <div className="wrap grid">
           <div>
-            <span className="eyebrow">Muster-Produkt zum Ausprobieren</span>
-            <h1 className="h1">Babytakt: der Begleiter für Schlaf und Essen im ersten Jahr.</h1>
+            <div className="lockup">
+              <BabytaktLogo size={52} />
+              <div>
+                <strong>Babytakt</strong>
+                <span className="eyebrow">Muster-Produkt zum Ausprobieren</span>
+              </div>
+            </div>
+            <h1 className="h1">Der Begleiter für Schlaf, Essen und den Familienalltag im ersten Jahr.</h1>
             <p className="lede">
               Ein erster Entwurf, wie ein eigenes Produkt für deine Community aussehen könnte: eine
               kleine App fürs Handy, die Eltern Tag und Nacht wirklich nutzen — nicht noch ein PDF, das
@@ -63,7 +70,9 @@ export default function MusterBabytakt() {
         .navlink{font-size:14px;font-weight:600;color:var(--accent)}
         .sec{padding:56px 0 72px;background:linear-gradient(180deg,#FFF3E4 0%,var(--paper) 60%)}
         .grid{display:grid;grid-template-columns:1fr 400px;gap:56px;align-items:start}
-        .h1{font-size:clamp(28px,3.6vw,42px);margin-top:12px;text-wrap:balance}
+        .lockup{display:flex;align-items:center;gap:14px}
+        .lockup strong{display:block;font-family:var(--disp);font-size:24px;font-weight:700;letter-spacing:-0.02em;line-height:1.1}
+        .h1{font-size:clamp(28px,3.6vw,42px);margin-top:18px;text-wrap:balance}
         .lede{margin-top:16px;color:var(--muted);font-size:16.5px;max-width:600px}
         .checks{list-style:none;padding:0;margin:20px 0 0;max-width:600px}
         .checks li{position:relative;padding:7px 0 7px 30px;font-size:15.5px}

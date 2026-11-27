@@ -3,7 +3,7 @@
 // vom Startbildschirm erscheint – dort fehlt sonst der Zusatz aus dem Link.
 export const dynamic = "force-dynamic";
 
-const clean = (v) => (v || "").replace(/[^A-Za-z0-9._-]/g, "").slice(0, 30);
+const clean = (v) => (v || "").replace(/[^A-Za-z0-9ÄÖÜäöüß ._-]/g, "").replace(/\s+/g, " ").trim().slice(0, 30);
 
 export function GET(request) {
   const fuer = clean(new URL(request.url).searchParams.get("fuer"));

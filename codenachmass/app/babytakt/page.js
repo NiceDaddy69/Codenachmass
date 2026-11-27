@@ -3,7 +3,7 @@ import AppClient from "./AppClient";
 // Babytakt als eigenständige App – ohne Einleitung, bildschirmfüllend.
 // Personalisierung über ?fuer=kanalname; die App-Beschreibung für den
 // Startbildschirm übernimmt den Namen in ihre Startadresse.
-const clean = (v) => (typeof v === "string" ? v.replace(/[^A-Za-z0-9._-]/g, "").slice(0, 30) : "");
+const clean = (v) => (typeof v === "string" ? v.replace(/[^A-Za-z0-9ÄÖÜäöüß ._-]/g, "").replace(/\s+/g, " ").trim().slice(0, 30) : "");
 
 export function generateMetadata({ searchParams }) {
   const fuer = clean(searchParams?.fuer);
